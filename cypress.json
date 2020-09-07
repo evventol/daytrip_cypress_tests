@@ -1,0 +1,14 @@
+{
+	"pageLoadTimeout": 20000,
+	"video":false,
+	"reporter": "cypress-testrail-reporter",
+	"reporterOptions": {
+		"domain": "daytrip.testrail.io",
+		"username": "daytriptest@gmail.com",
+		"password": "u88CkI/yxoplCASoiAol",
+		"projectId": 2,
+		"suiteId": 1
+	},
+	"projectId": "8poiq8",
+	"chromeWebSecurity": false
+}

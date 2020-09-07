@@ -1,0 +1,38 @@
+{
+  "name": "daytrip_cypress_tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-open": "./node_modules/.bin/cypress open",
+    "test": "cypress run --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --browser chrome --headless",
+    "smoke": " cypress run  --spec 'cypress/integration/smoke/*' --browser chrome --headless",
+    "new-site": "cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/new site/*' --browser chrome --headless",
+    "ci": "run-s lint:ci ci:cy-run",
+    "lint:ci": "ng lint",
+    "ci:cy-run": "start-server-and-test ci:start-server 4200 cy:run",
+    "ci:start-server": "angular-http-server --path ./dist/ngws -p 4200",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evventol/daytrip_cypress_tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evventol/daytrip_cypress_tests/issues"
+  },
+  "homepage": "https://github.com/evventol/daytrip_cypress_tests#readme",
+  "dependencies": {
+    "@cypress/webpack-preprocessor": "4.1.2",
+    "cypress-testrail-reporter": "1.1.0"
+  },
+  "devDependencies": {
+    "angular-http-server": "1.9.0",
+    "cypress": "5.0.0",
+    "npm-run-all": "4.1.5",
+    "start-server-and-test": "1.11.3",
+    "webpack": "4.41.6"
+  }
+}

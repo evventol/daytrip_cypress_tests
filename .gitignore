@@ -1,0 +1,8 @@
+src/.Trash-0/
+src/cypress/videos/
+cypress/videos/
+.Trash-0/
+node_modules/
+cypress/integration/header-spec.js
+cypress/screenshots/
+results/
