@@ -12,7 +12,10 @@
     "lint:ci": "ng lint",
     "ci:cy-run": "start-server-and-test ci:start-server 4200 cy:run",
     "ci:start-server": "angular-http-server --path ./dist/ngws -p 4200",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "start:ci": "serve --no-clipboard --listen ${PORT:-8080}",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info"
   },
   "repository": {
     "type": "git",
