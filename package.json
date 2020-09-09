@@ -31,7 +31,7 @@
   "dependencies": {
     "@cypress/webpack-preprocessor": "4.1.2",
     "cypress-testrail-reporter": "1.1.0",
-    "serve": "11.3.0"
+    "serve": "11.3.2"
   },
   "devDependencies": {
     "angular-http-server": "1.9.0",
