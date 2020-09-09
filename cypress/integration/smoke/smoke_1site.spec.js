@@ -10,7 +10,7 @@ const conf = new Configuration();
 describe("Smoke site", () => {
   beforeEach(() => {
     cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
-    cy.contains("accept", { timeout: 30000 }).should("be.visible");
+    cy.contains("accept", { timeout: 3000000 }).should("be.visible");
   cy.get("button", { timeout: 30000 })
     .contains("accept", { timeout: 30000 })
     .click({ force: true });
