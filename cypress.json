@@ -1,5 +1,5 @@
 {
-	"pageLoadTimeout": 20000,
+	"pageLoadTimeout": 120000,
 	"video":false,
 	"reporter": "cypress-testrail-reporter",
 	"reporterOptions": {
