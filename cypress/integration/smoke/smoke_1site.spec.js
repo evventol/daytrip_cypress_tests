@@ -9,7 +9,12 @@ const passInfo = new PassInfo();
 const conf = new Configuration();
 describe("Smoke site", () => {
   beforeEach(() => {
-    visitSite("https://sandbox.mydaytrip.com");
+    cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
+    cy.contains("accept", { timeout: 30000 }).should("be.visible");
+  cy.get("button", { timeout: 30000 })
+    .contains("accept", { timeout: 30000 })
+    .click({ force: true });
+    //visitSite("https://sandbox.mydaytrip.com");
   });
   it('Draft booking',()=>{
     conf.navigateToConfiguratorPage();
