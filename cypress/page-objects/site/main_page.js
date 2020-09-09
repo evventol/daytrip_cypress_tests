@@ -23,6 +23,6 @@ export function acceptPolicy() {
     .click({ force: true });
 }
 export function visitSite(page) {
-  cy.visit(page, { timeout: 1200000 });
+  cy.visit(page, { timeout: 12000000 });
   acceptPolicy();
 }

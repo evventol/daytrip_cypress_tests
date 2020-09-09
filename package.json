@@ -7,6 +7,7 @@
     "test-open": "./node_modules/.bin/cypress open",
     "test": "cypress run --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --browser chrome --headless",
     "smoke": " cypress run  --spec 'cypress/integration/smoke/*' --browser chrome --headless",
+    "smoke:electron":"cypress run  --spec 'cypress/integration/smoke/*'",
     "new-site": "cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/new site/*' --browser chrome --headless",
     "ci": "run-s lint:ci ci:cy-run",
     "lint:ci": "ng lint",
