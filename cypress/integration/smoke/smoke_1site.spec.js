@@ -9,7 +9,7 @@ const passInfo = new PassInfo();
 const conf = new Configuration();
 describe("Smoke site", () => {
   beforeEach(() => {
-    visitSite("138.197.229.126:443");
+    visitSite("https://sandbox.mydaytrip.com");
   });
   it('Draft booking',()=>{
     conf.navigateToConfiguratorPage();
