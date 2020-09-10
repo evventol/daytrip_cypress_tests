@@ -41,19 +41,19 @@ export function goToPageAndBack(link, checkString) {
 export function chooseOriginDestination(flag, shortname, fullName) {
     switch (flag){
         case 0:{//ns origin
-            cy.get('input[placeholder="From.."]').first().type(shortname)
+            cy.get('input[placeholder="From.."]',{timeout:10000}).first().type(shortname)
             break;
         }
         case 1:{//ns destination
-            cy.get('input[placeholder="..and go"]').first().type(shortname)
+            cy.get('input[placeholder="..and go"]',{timeout:10000}).first().type(shortname)
             break;
         }
         case 2:{//site origin
-            cy.contains('I want to start in...').first().type(shortname)
+            cy.contains('I want to start in...',{timeout:10000}).first().type(shortname)
             break;
         }
         case 3:{//site destination
-            cy.contains('... and go to').type(shortname)
+            cy.contains('... and go to',{timeout:10000}).type(shortname)
         }
     }
 

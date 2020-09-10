@@ -13,6 +13,9 @@ describe("Smoke site", () => {
     
     //visitSite("https://sandbox.mydaytrip.com");
   });
+  it("empty test",()=>{
+    
+  })
   it('Draft booking',()=>{
     cy.contains("accept", { timeout: 300000 }).should("be.visible");
   cy.get("button", { timeout: 30000 })
@@ -41,7 +44,7 @@ describe("Smoke site", () => {
     conf.navigateToConfiguratorPage();
     conf.bookLocation();
     passInfo.TAemailInfo();
-    cy.contains("€333");
+    cy.contains("€333",{timeout:10000});
     passInfo.TApassengerInfo();
     cy.wait(1000);
     passInfo.cashPayment();
@@ -66,6 +69,6 @@ describe("Smoke site", () => {
     passInfo.customerPassengerInfo();
     passInfo.customerCardPayment();
     cy.contains("Confirm & Pay").click();
-    cy.contains("Your trip is confirmed!", { timeout: 50000 });
+    cy.contains("Your trip is confirmed!", { timeout: 150000 });
   });
 });
