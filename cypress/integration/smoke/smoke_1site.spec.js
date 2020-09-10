@@ -10,17 +10,15 @@ const conf = new Configuration();
 describe("Smoke site", () => {
   beforeEach(() => {
     cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
-    
-    //visitSite("https://sandbox.mydaytrip.com");
+    // cy.contains("accept", { timeout: 300000 }).should("be.visible");
+    // cy.get("button", { timeout: 30000 })
+    // .contains("accept", { timeout: 30000 })
+    // .click({ force: true });
   });
   it("empty test",()=>{
     
   })
   it('Draft booking',()=>{
-    cy.contains("accept", { timeout: 300000 }).should("be.visible");
-  cy.get("button", { timeout: 30000 })
-    .contains("accept", { timeout: 30000 })
-    .click({ force: true });
     conf.navigateToConfiguratorPage();
     conf.bookWithoutLocation();
     passInfo.emailInfo();
