@@ -12,7 +12,7 @@ export function StartBookingTrip() {
   //type berl and choose Berlin
   chooseOriginDestination(3, "berl", "Berlin");
   cy.contains("search").click();
-  cy.contains("Plan your trip from", { timeout: 10000 });
+  cy.contains("Plan your trip from", { timeout: 30000 });
 }
 export function acceptPolicy() {
   //accept terms of use

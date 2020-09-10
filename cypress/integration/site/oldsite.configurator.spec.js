@@ -36,11 +36,11 @@ describe("old site-> main page", () => {
     cy.get("._38TLix94Eg3g4bHzzWTm7b").click();
     cy.contains("€350");
     //add 2 passengers
-    cy.get("._3bbJo1E02JnUudnyqHI1Ty").dblclick();
+    cy.get("._3bbJo1E02JnUudnyqHI1Ty",{timeout:10000}).dblclick();
     //remove 1
     cy.get("._2zXS_QZ-0rkh7Ldonzva_B").click();
     //add 1
-    cy.get("._3bbJo1E02JnUudnyqHI1Ty").click();
+    cy.get("._3bbJo1E02JnUudnyqHI1Ty",{timeout:10000}).click();
     //choose van
 
     cy.contains("€286");
