@@ -54,6 +54,7 @@ describe("Smoke site", () => {
     passInfo.passengerInfo();
     passInfo.cashPayment();
     cy.contains("Confirm & Pay").click();
+    
     //cy.contains("Your trip is confirmed!", { timeout: 50000 });
   });
   it("C82	Preloging card booking", () => {
