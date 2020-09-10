@@ -15,9 +15,6 @@ describe("Smoke site", () => {
     // .contains("accept", { timeout: 30000 })
     // .click({ force: true });
   });
-  it("empty test",()=>{
-    
-  })
   it('Draft booking',()=>{
     conf.navigateToConfiguratorPage();
     conf.bookWithoutLocation();
@@ -67,6 +64,6 @@ describe("Smoke site", () => {
     passInfo.customerPassengerInfo();
     passInfo.customerCardPayment();
     cy.contains("Confirm & Pay").click();
-    cy.contains("Your trip is confirmed!", { timeout: 150000 });
+    cy.contains("Your trip is confirmed!", { timeout: 1500000 });
   });
 });

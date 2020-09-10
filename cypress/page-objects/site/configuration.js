@@ -5,7 +5,7 @@ export class Configuration {
 		cy.contains('sights you can visit along the way')
 		//add 3d person
 		cy.get('._3bbJo1E02JnUudnyqHI1Ty', { timeout: 10000 }).click()
-		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz').contains("3",{timeout:10000})
+		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz',{timeout:15000}).contains("3",{timeout:15000})
 		//choose lux sedan
 		cy.get('._38TLix94Eg3g4bHzzWTm7b').click()
 		//go next
@@ -36,10 +36,10 @@ export class Configuration {
 		cy.wait(1000)
 		//add 3d person
 		cy.get('._3bbJo1E02JnUudnyqHI1Ty', { timeout: 10000 }).click()
-		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz').contains("3",{timeout:10000})
+		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz',{timeout:15000}).contains("3",{timeout:10000})
 		//add 4d person
 		cy.get('._3bbJo1E02JnUudnyqHI1Ty', { timeout: 15000 }).click()
-		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz').contains("4",{timeout:10000})
+		cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz',{timeout:15000}).contains("4",{timeout:10000})
 		//choose lux sedan
 		cy.get('._38TLix94Eg3g4bHzzWTm7b').click()
 		cy.get('button').contains('book this trip').click()
