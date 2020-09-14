@@ -22,7 +22,6 @@ defaults: &defaults
     - $(npm bin)/print-env TRAVIS
     - npm run start:ci &
     - npm run smoke
-    - npm run smoke:electron
     - kill $(jobs -p) || true
 
 jobs:
