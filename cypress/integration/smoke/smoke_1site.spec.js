@@ -8,63 +8,60 @@ import { cancelTrip } from "../../page-objects/site/confirmation_page";
 const passInfo = new PassInfo();
 const conf = new Configuration();
 describe("Smoke site", () => {
-  beforeEach(() => {
-    cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
-    // cy.contains("accept", { timeout: 300000 }).should("be.visible");
-    // cy.get("button", { timeout: 30000 })
-    // .contains("accept", { timeout: 30000 })
-    // .click({ force: true });
-  });
-  it('Draft booking',()=>{
-    conf.navigateToConfiguratorPage();
-    conf.bookWithoutLocation();
-    passInfo.emailInfo();
-    passInfo.passengerInfo();
-})
-  it("Urgent booking ", () => { 
-    StartBookingTrip();
-    let newURL=conf.nextDayConfiguration();
-    cy.visit("https://sandbox.mydaytrip.com")
-    cy.visit(newURL,{timeout:100000});
-    conf.bookWithoutLocation();
-    passInfo.emailInfo();
-    passInfo.passengerInfo();
-    passInfo.cashPayment();
-    cy.contains("Confirm & Pay").click();
-    cy.contains("We’re looking for your driver", { timeout: 50000 });
-    cy.contains('cancel the booking request now').click()
-  });
-  it("TA booking", () => {
-    loginAsTA();
-    conf.navigateToConfiguratorPage();
-    conf.bookLocation();
-    passInfo.TAemailInfo();
-    cy.contains("€333",{timeout:10000});
-    passInfo.TApassengerInfo();
-    cy.wait(1000);
-    passInfo.cashPayment();
-    cy.contains("Confirm & Pay").click();
-    cy.contains("Your trip is confirmed!", { timeout: 50000 });
-    cancelTrip();
-  });
-  it("C81	Cash booking", () => {
-    conf.navigateToConfiguratorPage();
-    conf.bookWithoutLocation();
-    passInfo.emailInfo();
-    passInfo.passengerInfo();
-    passInfo.cashPayment();
-    cy.contains("Confirm & Pay").click();
-    
-    //cy.contains("Your trip is confirmed!", { timeout: 50000 });
-  });
-  it("C82	Preloging card booking", () => {
-    loginToCI();
-    conf.navigateToConfiguratorPage();
-    conf.bookLocation();
-    passInfo.TAemailInfo();
-    passInfo.customerPassengerInfo();
-    passInfo.customerCardPayment();
-    cy.contains("Confirm & Pay").click();
-    //cy.contains("Your trip is confirmed!", { timeout: 50000 });
-  });
+    beforeEach(() => {
+        cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
+        // visitSite("https://sandbox.mydaytrip.com")
+    });
+    it('Draft booking', () => {
+        conf.navigateToConfiguratorPage();
+        conf.bookWithoutLocation();
+        passInfo.emailInfo();
+        passInfo.passengerInfo();
+    })
+    it("Urgent booking ", () => {
+        StartBookingTrip();
+        let newURL = conf.nextDayConfiguration();
+        cy.visit("https://sandbox.mydaytrip.com")
+        cy.visit(newURL, { timeout: 100000 });
+        conf.bookWithoutLocation();
+        passInfo.emailInfo();
+        passInfo.passengerInfo();
+        passInfo.cashPayment();
+        cy.contains("Confirm & Pay").click();
+        cy.contains("We’re looking for your driver", { timeout: 50000 });
+        cy.contains('cancel the booking request now').click()
+    });
+    it("TA booking", () => {
+        loginAsTA();
+        conf.navigateToConfiguratorPage();
+        conf.bookLocation();
+        passInfo.TAemailInfo();
+        cy.contains('You are logged in as a travel agent. You will receive your 10% discount at checkout.', { timeout: 10000 })
+        cy.contains("€333", { timeout: 10000 });
+        passInfo.TApassengerInfo();
+        cy.wait(1000);
+        passInfo.cashPayment();
+        cy.contains("Confirm & Pay").click();
+        cy.contains("Your trip is confirmed!", { timeout: 50000 });
+        cancelTrip();
+    });
+    it("C81	Cash booking", () => {
+        conf.navigateToConfiguratorPage();
+        conf.bookWithoutLocation();
+        passInfo.emailInfo();
+        passInfo.passengerInfo();
+        passInfo.cashPayment();
+        cy.contains("Confirm & Pay").click();
+        cy.contains("Your trip is confirmed!", { timeout: 50000 });
+    });
+    it("C82	Preloging customer card booking", () => {
+        loginToCI();
+        conf.navigateToConfiguratorPage();
+        conf.bookLocation();
+        passInfo.TAemailInfo();
+        passInfo.customerPassengerInfo();
+        passInfo.customerCardPayment();
+        cy.contains("Confirm & Pay").click();
+        cy.contains("Your trip is confirmed!", { timeout: 50000 });
+    });
 });
