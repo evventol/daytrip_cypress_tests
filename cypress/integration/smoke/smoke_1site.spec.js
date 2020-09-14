@@ -37,7 +37,6 @@ describe("Smoke site", () => {
         conf.bookLocation();
         passInfo.TAemailInfo();
         cy.contains('You are logged in as a travel agent. You will receive your 10% discount at checkout.', { timeout: 10000 })
-        cy.contains("€333", { timeout: 10000 });
         passInfo.TApassengerInfo();
         cy.wait(1000);
         passInfo.cashPayment();

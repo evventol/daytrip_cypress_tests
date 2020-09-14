@@ -3,9 +3,6 @@ export class Configuration {
     bookWithoutLocation() {
         //contains location sector
         cy.contains('sights you can visit along the way', { timeout: 10000 }).should('be.visible')
-            //add 3d person
-        cy.get('._3bbJo1E02JnUudnyqHI1Ty', { timeout: 10000 }).click()
-        cy.get('._3BJ0Skk3qqIJE2ZmQdXhAz', { timeout: 15000 }).contains("3", { timeout: 15000 })
             //choose lux sedan
         cy.get('._38TLix94Eg3g4bHzzWTm7b').click()
             //go next

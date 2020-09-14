@@ -54,7 +54,7 @@ export function finish3DSecureBooking() {
     cy.contains("Confirm and pay").click();
     cy.get('input[id="code"]', { timeout: 10000 }).type('MANGOPAY123')
     cy.contains('Submit').click()
-        //cy.contains("Your booking is confirmed!", { timeout: 150000 });
+    cy.contains("Your booking is confirmed!", { timeout: 150000 });
 }
 export function finishCashBooking() {
     cy.contains("Cash").click({ force: true });
