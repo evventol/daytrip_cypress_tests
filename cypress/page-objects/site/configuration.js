@@ -4,6 +4,7 @@ export class Configuration {
         //contains location sector
         cy.contains('sights you can visit along the way', { timeout: 10000 }).should('be.visible')
             //choose lux sedan
+        cy.wait(1000)
         cy.get('._38TLix94Eg3g4bHzzWTm7b').click()
             //go next
         cy.get('button').contains('book this trip').click()
@@ -46,5 +47,6 @@ export class Configuration {
         const confirmPage = "https://sandbox.mydaytrip.com/configurator?departureAt=1637226000000&isOtherDirection=true&passengers=2&routeId=dc787d17-8146-438a-9be7-07fe1153b354&vehicles=0"
             //go to confirm page
         cy.visit(confirmPage)
+        cy.contains('sights you can visit along the way', { timeout: 10000 }).should('be.visible')
     }
 }

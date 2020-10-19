@@ -10,7 +10,7 @@ const conf = new Configuration();
 describe("Smoke site", () => {
     beforeEach(() => {
         cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
-        // visitSite("https://sandbox.mydaytrip.com")
+        //visitSite("https://sandbox.mydaytrip.com")
     });
     it('Draft booking', () => {
         conf.navigateToConfiguratorPage();

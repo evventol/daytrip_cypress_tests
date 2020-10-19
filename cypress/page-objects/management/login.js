@@ -6,18 +6,21 @@ export class Login {
     }
     driverRoot() {
         this.enterCredentials('ev.test.ve+3131@gmail.com', 'Q1')
-        cy.contains('Upcoming trips',{timeout:150000})
+        cy.contains('Upcoming trips', { timeout: 150000 })
     }
     companyRoot() {
         this.enterCredentials('ev.test.ve+9696@gmail.com', 'L1yhL7LI')
-        cy.contains('Upcoming trips',{timeout:150000})
+        cy.contains('Upcoming trips', { timeout: 150000 })
     }
     enterCredentials(email, passw) {
         //enter email
         cy.get('input[name="email"]', { timeout: 10000 }).type(email)
-        //enter password
+            //enter password
         cy.get('input[name="password"]', { timeout: 3000 }).type(passw)
-        //log in
+            //log in
         cy.contains('log in', { timeout: 3000 }).click()
+    }
+    unlogin() {
+        cy.get('._1b4x5tFsoGvkCMvEuA1KBy', { timeout: 10000 }).click({ force: true })
     }
 }

@@ -22,9 +22,6 @@ install:
   stage: build
 
   script:
-    - npm -v
-    - apt-get update
-    - apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
     - npm ci
     - npx cypress cache path
     - npx cypress cache list
@@ -34,7 +31,8 @@ install:
   image: cypress/browsers:node14.7.0-chrome84
   stage: test
   script:
-    - npm run smoke
+      - npm run start:ci &
+      - npm run smoke
   artifacts:
     when: always
     paths:
