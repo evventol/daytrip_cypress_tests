@@ -21,6 +21,8 @@ export class Login {
         cy.contains('log in', { timeout: 3000 }).click()
     }
     unlogin() {
-        cy.get('._1b4x5tFsoGvkCMvEuA1KBy', { timeout: 10000 }).click({ force: true })
+        cy.clearCookies()
+        cy.clearLocalStorage()
+        cy.reload()
     }
 }

@@ -63,5 +63,7 @@ export function finishCashBooking() {
 }
 export function finishUrgentCardBooking() {
     cy.contains("Confirm and pay").click();
+    cy.wait(500)
+    cy.contains("Confirm and pay").click({ force: true });
     cy.contains("We’re looking for a driver", { timeout: 150000 });
 }

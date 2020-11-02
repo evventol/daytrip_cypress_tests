@@ -27,12 +27,12 @@ const mainPage = "https://website.staging.mydaytrip.net/"
 const configurationPage = "https://website.staging.mydaytrip.net/configurator?adults=2&children=0&currency=0&departureAt=1655359200000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0"
 describe("Smoke newsite", () => {
     beforeEach(() => {
-        //visitNewSite(mainPage);
-        cy.visit(mainPage, { timeout: 3000000 })
+        visitNewSite(mainPage);
+        //cy.visit(mainPage, { timeout: 3000000 })
     });
     it("Landing cash booking", () => {
         landingBooking()
-        configurateWithoutLocation("€225");
+        configurateWithoutLocation("€226");
         fillEmail();
         fillPassengerInfo();
         finishCashBooking();
@@ -62,7 +62,7 @@ describe("Smoke newsite", () => {
         finishUrgentCardBooking();
 
     })
-    it('Customer booking', () => {
+    it.only('Customer booking', () => {
         loginAsCustomer()
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
@@ -71,7 +71,7 @@ describe("Smoke newsite", () => {
         cy.wait(1000)
         fillPreCustomerInfo('test');
         AMEXpayment();
-        finish3DSecureBooking();
+        //finish3DSecureBooking();
 
     })
 });

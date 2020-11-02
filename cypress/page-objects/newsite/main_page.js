@@ -31,10 +31,7 @@ export function goToPageAndBack(link, checkString) {
     if (link != 'Blog') {
         cy.contains(checkString)
         cy.go('back')
-    } else {
-
-        cy.contains(checkString)
-    }
+    } else {}
 }
 
 export function chooseOriginDestination(flag, shortname, fullName) {
@@ -64,47 +61,49 @@ export function chooseOriginDestination(flag, shortname, fullName) {
     cy.contains(fullName, { timeout: 10000 }).should('be.visible').click({ force: true })
 }
 export function checkPassenger(adultsNum, childrenNum, luggageNum) {
-    cy.get('button').contains('passengers').click({ force: true })
+    cy.contains('passengers')
+    cy.get('button').contains(' passengers').click({ force: true })
+    cy.contains('Adults:', { timeout: 5000 })
     for (let i = 0; i < adultsNum; i++) {
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .ikCcQi').dblclick({ force: true })
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .hZYJpi').click({ force: true })
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
     }
     for (let i = 0; i < childrenNum; i++) {
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .ikCcQi').dblclick({ force: true })
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .hZYJpi').click({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
     }
     for (let i = 0; i < luggageNum; i++) {
-        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > .ikCcQi').dblclick({ force: true })
-        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > .hZYJpi').click({ force: true })
+        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
+        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
     }
     cy.get('body').click()
 }
-export function chooseDate(numMonth, date) { //numMonth - number of month in future, date-day in month
-    cy.contains('-- select --').click()
-    cy.get('.bYdzaX').click({ force: true })
-    cy.get('.eYhIvk').click({ force: true })
+export function chooseDate(numMonth, date, currentDate) { //numMonth - number of month in future, date-day in month, currentDate - current date
+    cy.get('button').contains(currentDate).click({ force: true })
+    cy.get('.EkxpA').click({ force: true })
+    cy.get('.ehehoX').click({ force: true })
     if (numMonth == 0) {
-        cy.contains(date).click()
+        cy.contains(date).click({ force: true })
     } else {
         for (let i = 0; i < numMonth; i++) {
-            cy.get('.bYdzaX').click({ force: true })
+            cy.get('.EkxpA').click({ force: true })
         }
-        cy.contains(date).click()
+        cy.contains(date).click({ force: true })
     }
 }
-export function chooseTime() {
+export function chooseTime(time) {
     //click on time
-    cy.get('button').contains(':00 AM').click({ force: true })
+    cy.get('button').contains(time).click({ force: true })
         //change am to pm
-    cy.contains('PM').click({ force: true })
+    cy.get('.TimePickerTimeViewstyles__TimePickerTimeViewPhaseSwitchButton-pbft0o-7').click({ force: true })
         //+2 hour
-    cy.get('.cYkKZT').dblclick({ force: true })
+    cy.get(':nth-child(1) > .kkYFXX').dblclick({ force: true })
         //-1 hour
-    cy.get(':nth-child(1) > .eJfdas').click({ force: true })
+    cy.get(':nth-child(1) > .bKdPNI').click({ force: true })
         //+30 min
-    cy.get(':nth-child(3) > .eJfdas').dblclick({ force: true })
+    cy.get(':nth-child(3) > .kkYFXX').dblclick({ force: true })
         //-15 min
-    cy.get(':nth-child(3) > .cYkKZT').click({ force: true })
+    cy.get(':nth-child(3) > .bKdPNI').click({ force: true })
     cy.get('body').click()
 }
 export function acceptPolicy() {

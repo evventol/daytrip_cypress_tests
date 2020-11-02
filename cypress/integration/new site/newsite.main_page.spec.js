@@ -1,6 +1,6 @@
 /// <reference types = "cypress"/>
 
-import { goToPageAndBack, chooseOriginDestination, checkPassenger, chooseDate, chooseTime,visitNewSite } from '../../page-objects/newsite/main_page.js'
+import { goToPageAndBack, chooseOriginDestination, checkPassenger, chooseDate, chooseTime, visitNewSite } from '../../page-objects/newsite/main_page.js'
 
 describe('new site-> main page', () => {
     beforeEach(() => {
@@ -16,26 +16,26 @@ describe('new site-> main page', () => {
     it('C54 check buttons', () => {
         //check all buttons
         goToPageAndBack('All routes', 'Select a country')
-        /*discover page doesn't exist*/
         goToPageAndBack('Company', 'travelling to another city')
-        //check route
-        goToPageAndBack('Budapest to Vienna', '404')
-        //check terms
+            //check route
+        goToPageAndBack('Discover', 'Discover the world with Daytrip')
+        goToPageAndBack('Blog', "")
+            //check terms
         goToPageAndBack('Terms of use', 'KEY DEFINITIONS')
         goToPageAndBack('Privacy policy', 'This is Privacy Policy of DAYTRIP EUROPE')
     })
     it('C56 fill trip info', () => {
         //type pra
         chooseOriginDestination(0, 'pra', 'Prague')
-        //type berl
+            //type berl
         chooseOriginDestination(1, 'berl', 'Berlin')
-        //add passenger info
-        checkPassenger(1,1,1)
-        //add date
-        chooseDate(1, 25)
-        //add time
-        chooseTime()
-        //book trip
+            //add passenger info
+        checkPassenger(1, 1, 1)
+            //add date
+        chooseDate(1, 25, "select")
+            //add time
+        chooseTime(":00 AM")
+            //book trip
         cy.contains('Search').first().click()
         cy.contains('Search routes')
     })
