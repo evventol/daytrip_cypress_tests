@@ -30,6 +30,7 @@ export class Configuration {
     bookLocation() {
         cy.contains('sights you can visit along the way', { timeout: 10000 })
         cy.contains('Terezin', { timeout: 10000 }).should('be.visible')
+        cy.wait(1000)
         cy.contains('Terezin', { timeout: 5000 }).click()
         cy.wait(1000)
             //add 3d person

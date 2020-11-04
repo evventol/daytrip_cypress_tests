@@ -19,8 +19,8 @@ describe("Smoke management", () => {
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder();
-        ord.assignVehicle();
-        ord.checkPriceCreateOrder(" ");
+        ord.assignVehicle("sedan", "€558");
+        ord.checkPriceCreateOrder("558 + 140 = 698");
         ord.editOrder();
         ord.editLocation(1, "bramber", "Bramberg, Austria", "min");
         ord.acceptAndConfirmOrder()
@@ -32,8 +32,8 @@ describe("Smoke management", () => {
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder();
-        ord.editLocation(0, "bramber", "Bramberg, Austria", "539 min (861 km)");
-        ord.assignVehicle();
+        ord.editLocation(0, "bramber", "Bramberg, Austria", "km)");
+        ord.assignVehicle("sedan", "€834");
         ord.checkPriceCreateOrder("834 + 209 = 1043");
         ord.cancelOrder();
     })
@@ -55,15 +55,16 @@ describe("Smoke management", () => {
         login.companyRoot();
         dr.acceptDriver();
     });
-    it("C87 smoke-cancelling order", () => {
+    it.only("C87 smoke-cancelling order", () => {
         login.managerRoot();
-        cy.wait(5000);
         navig.goToOrderPage(0);
         ord.cancelOrder();
-        cy.wait(5000);
+        login.unlogin()
+        login.managerRoot();
         navig.goToOrderPage(2);
         ord.cancelOrder();
-        cy.wait(5000);
+        login.unlogin()
+        login.managerRoot();
         navig.goToOrderPage(3);
         ord.cancelOrder();
     });

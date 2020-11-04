@@ -13,14 +13,13 @@ export function addStop(beforPrice, stopPrice, afterPrice) {
     cy.contains(beforPrice)
     let locationPrice = "Add for " + stopPrice
     cy.contains(locationPrice).should('be.visible')
-    cy.contains(locationPrice).click();
-    cy.contains(locationPrice).click();
+    cy.contains(locationPrice).dblclick();
     cy.contains(afterPrice)
 }
-export function configurateWithLocation() {
-    addStop("226", "€24", "250")
+export function configurateWithLocation(time, mpvPrice) {
+    addStop(time[0], time[1], time[2])
     cy.contains('Upgrade to a Mpv').click()
-    cy.contains('311')
+    cy.contains(mpvPrice)
     cy.contains("Book your trip for").click({ force: true });
     cy.contains('Complete your booking', { timeout: 5000 }).should('be.visible')
 }

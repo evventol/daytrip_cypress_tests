@@ -4,9 +4,9 @@ export function landingBooking() {
         //add passenger info
     checkPassenger(1, 0, 0)
         //add date
-    chooseDate(1, 25)
+    chooseDate(1, 25, "select")
         //add time
-    chooseTime()
+    chooseTime(":00")
         //book trip
     cy.contains('Search').first().click()
     cy.contains('Search routes', { timeout: 5000 }).should('be.visible')
@@ -122,9 +122,9 @@ export function startBooking() {
         //add passenger info
     checkPassenger(1, 0, 0)
         //add date
-    chooseDate(1, 25)
+    chooseDate(1, 25, "select")
         //add time
-    chooseTime()
+    chooseTime(":00")
         //book trip
     cy.contains('Search').first().click()
     cy.contains('Search routes', { timeout: 5000 }).should('be.visible')

@@ -16,7 +16,6 @@ describe("Smoke site", () => {
         conf.navigateToConfiguratorPage();
         conf.bookWithoutLocation();
         passInfo.emailInfo();
-        passInfo.passengerInfo();
     })
     it("Urgent booking ", () => {
         StartBookingTrip();
@@ -31,9 +30,10 @@ describe("Smoke site", () => {
         cy.contains("We’re looking for your driver", { timeout: 50000 });
         cy.contains('cancel the booking request now').click()
     });
-    it("TA booking", () => {
+    it.only("TA booking", () => {
         loginAsTA();
         conf.navigateToConfiguratorPage();
+        cy.reload()
         conf.bookLocation();
         passInfo.TAemailInfo();
         cy.contains('You are logged in as a travel agent. You will receive your 10% discount at checkout.', { timeout: 10000 })
@@ -63,4 +63,9 @@ describe("Smoke site", () => {
         cy.contains("Confirm & Pay").click();
         cy.contains("Your trip is confirmed!", { timeout: 50000 });
     });
+    afterEach(() => {
+        cy.clearCookies()
+        cy.clearLocalStorage()
+        cy.reload()
+    })
 });

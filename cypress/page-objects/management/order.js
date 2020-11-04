@@ -15,11 +15,12 @@ export class Order {
         //destination
         subOrd.chooseStringToWrite(1, "destination", "vienna", "Vienna, Austria");
     }
-    assignVehicle() {
+    assignVehicle(typeVeh, priceVeh) {
         cy.get("button")
             .contains("set recommended configuration ", { timeout: 5000 })
             .click();
         cy.contains("confirm", { timeout: 5000 }).click({ timeout: 5000 });
+        cy.contains(typeVeh + " " + priceVeh, { timeout: 10000 }).should('be.visible')
     }
     checkPriceCreateOrder(price) {
         //check price
@@ -69,7 +70,7 @@ export class Order {
         subOrd.chooseStringToWrite(0, "May", "april", "April");
         cy.contains("save", { timeout: 10000 }).click();
         cy.contains("confirm", { timeout: 1000 }).click();
-        //subOrd.reloadPage();
+        subOrd.reloadPage();
     }
 
     assignDriver(short_name, full_name) {
