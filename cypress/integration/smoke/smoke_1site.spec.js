@@ -30,7 +30,7 @@ describe("Smoke site", () => {
         cy.contains("We’re looking for your driver", { timeout: 50000 });
         cy.contains('cancel the booking request now').click()
     });
-    it.only("TA booking", () => {
+    it("TA booking", () => {
         loginAsTA();
         conf.navigateToConfiguratorPage();
         cy.reload()

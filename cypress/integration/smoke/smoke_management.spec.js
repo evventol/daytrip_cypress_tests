@@ -55,7 +55,7 @@ describe("Smoke management", () => {
         login.companyRoot();
         dr.acceptDriver();
     });
-    it.only("C87 smoke-cancelling order", () => {
+    it("C87 smoke-cancelling order", () => {
         login.managerRoot();
         navig.goToOrderPage(0);
         ord.cancelOrder();

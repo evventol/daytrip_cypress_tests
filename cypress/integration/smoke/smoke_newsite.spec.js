@@ -41,7 +41,7 @@ describe("Smoke newsite", () => {
         fillPassengerInfo();
         finishCashBooking();
     });
-    it.only("TA card booking", () => {
+    it("TA card booking", () => {
         loginAsTA();
         startBooking();
         cy.contains('Your 10% travel agent discount', { timeout: 5000 })
