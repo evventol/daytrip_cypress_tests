@@ -57,7 +57,7 @@ describe("Smoke management", () => {
     });
     it("C87 smoke-cancelling order", () => {
         login.managerRoot();
-        navig.goToOrderPage(0);
+        navig.goToOrderPage(1);
         ord.cancelOrder();
         login.unlogin()
         login.managerRoot();

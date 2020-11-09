@@ -48,7 +48,7 @@ export function chooseOriginDestination(flag, shortname, fullName) {
             }
         case 2:
             { //site origin
-                cy.contains('I want to start in...', { timeout: 10000 }).first().type(shortname)
+                cy.contains('I want', { timeout: 10000 }).first().type(shortname)
                 break;
             }
         case 3:

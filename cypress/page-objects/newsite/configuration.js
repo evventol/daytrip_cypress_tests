@@ -18,7 +18,7 @@ export function addStop(beforPrice, stopPrice, afterPrice) {
 }
 export function configurateWithLocation(time, mpvPrice) {
     addStop(time[0], time[1], time[2])
-    cy.contains('Upgrade to a Mpv').click()
+    cy.contains('Upgrade to a Mpv', { timeout: 15000 }).click({ force: true })
     cy.contains(mpvPrice)
     cy.contains("Book your trip for").click({ force: true });
     cy.contains('Complete your booking', { timeout: 5000 }).should('be.visible')

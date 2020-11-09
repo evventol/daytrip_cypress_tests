@@ -40,7 +40,7 @@ describe("Smoke site", () => {
         passInfo.TApassengerInfo();
         cy.wait(1000);
         passInfo.cashPayment();
-        cy.contains("Confirm & Pay").click();
+        cy.contains("Confirm & Pay").dblclick({ force: true });
         cy.contains("Your trip is confirmed!", { timeout: 50000 });
         cancelTrip();
     });
@@ -50,7 +50,7 @@ describe("Smoke site", () => {
         passInfo.emailInfo();
         passInfo.passengerInfo();
         passInfo.cashPayment();
-        cy.contains("Confirm & Pay").click();
+        cy.contains("Confirm & Pay").dblclick({ force: true });
         cy.contains("Your trip is confirmed!", { timeout: 50000 });
     });
     it("C82	Preloging customer card booking", () => {
@@ -60,7 +60,7 @@ describe("Smoke site", () => {
         passInfo.TAemailInfo();
         passInfo.customerPassengerInfo();
         passInfo.customerCardPayment();
-        cy.contains("Confirm & Pay").click();
+        cy.contains("Confirm & Pay").dblclick({ force: true });
         cy.contains("Your trip is confirmed!", { timeout: 50000 });
     });
     afterEach(() => {
