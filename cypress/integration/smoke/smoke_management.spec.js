@@ -11,14 +11,13 @@ describe("Smoke management", () => {
     const ord = new Order();
 
     beforeEach(() => {
-        cy.visit("https://management.sandbox.mydaytrip.com/#/", { timeout: 1200000 });
+        cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
 
     });
-
     it("C83 smoke-create&change order", () => {
         login.managerRoot();
         navig.goToNewOrderPage();
-        ord.fillInfoOfOrder();
+        ord.fillInfoOfOrder(0, 1);
         ord.assignVehicle("sedan", "€558");
         ord.checkPriceCreateOrder("558 + 140 = 698");
         ord.editOrder();
@@ -31,7 +30,7 @@ describe("Smoke management", () => {
     it('create order with location', () => {
         login.managerRoot();
         navig.goToNewOrderPage();
-        ord.fillInfoOfOrder();
+        ord.fillInfoOfOrder(0, 1);
         ord.editLocation(0, "bramber", "Bramberg, Austria", "km)");
         ord.assignVehicle("sedan", "€834");
         ord.checkPriceCreateOrder("834 + 209 = 1043");
@@ -55,18 +54,11 @@ describe("Smoke management", () => {
         login.companyRoot();
         dr.acceptDriver();
     });
-    it("C87 smoke-cancelling order", () => {
+    it.skip("C87 smoke-cancelling order", () => {
         login.managerRoot();
         navig.goToOrderPage(1);
         ord.cancelOrder();
         login.unlogin()
-        login.managerRoot();
-        navig.goToOrderPage(2);
-        ord.cancelOrder();
-        login.unlogin()
-        login.managerRoot();
-        navig.goToOrderPage(3);
-        ord.cancelOrder();
     });
     afterEach(() => {
         login.unlogin()

@@ -2,7 +2,7 @@
 export class Login {
     managerRoot() {
         this.enterCredentials('evventol@gmail.com', 'gB8FqjkP')
-        cy.contains('You can create payment request for the customer here.').should('be.visible')
+        cy.contains('You can create payment request for the customer here.')
     }
     driverRoot() {
         this.enterCredentials('ev.test.ve+3131@gmail.com', 'Q1')

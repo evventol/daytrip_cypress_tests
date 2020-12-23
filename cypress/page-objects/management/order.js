@@ -2,18 +2,31 @@
 import { SubOrder } from "../../page-objects/management/subOrder";
 const subOrd = new SubOrder();
 export class Order {
-    fillInfoOfOrder() {
-        subOrd.checkText(0);
-        //change month
+
+    fillInfoOfOrder(origin, destination) {
+        let locations = [
+                ["lviv", "Lviv, Ukrain"],
+                ["vienna", "Vienna, Austria"],
+                ['brno', 'Brno, Czech Republic'],
+                ['paris', 'Paris, France'],
+                ['malaga', 'Malaga, Spain'],
+                ['prague', "Prague, Czech Republic"],
+                ["portland", "Portland, OR, United States"],
+                ['los angeles', 'Los Angeles, CA, United States'],
+                ['boston', 'Boston, MA, United States'],
+                ['san francisco', 'San Francisco, CA, United States']
+            ]
+            //subOrd.checkText(0);
+            //change month
         let month = subOrd.currentMonth();
         subOrd.chooseStringToWrite(0, month, "may", "May");
         //change year
         let year = subOrd.currentYear();
         subOrd.chooseStringToWrite(0, year, "2022", "2022");
         //Prague - origin
-        subOrd.chooseStringToWrite(1, "origin", "lviv", "Lviv, Ukrain");
+        subOrd.chooseStringToWrite(1, "origin", locations[origin][0], locations[origin][1]);
         //destination
-        subOrd.chooseStringToWrite(1, "destination", "vienna", "Vienna, Austria");
+        subOrd.chooseStringToWrite(1, "destination", locations[destination][0], locations[destination][1]);
     }
     assignVehicle(typeVeh, priceVeh) {
         cy.get("button")

@@ -23,16 +23,15 @@ import {
     configurateWithoutLocation,
     nextDayConfiguration
 } from "../../page-objects/newsite/configuration.js";
-const mainPage = "https://website.staging.mydaytrip.net/"
 let locationTime = [
     ["226", "€24", "250"],
     ["79", "€19", "98"]
 ]
-const configurationPage = "https://website.staging.mydaytrip.net/configurator?adults=2&children=0&currency=0&departureAt=1655359200000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0"
+const configurationPage = Cypress.env('site_home_page') + "configurator?adults=2&children=0&currency=0&departureAt=1655359200000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0"
 describe("Smoke newsite", () => {
     beforeEach(() => {
-        //visitNewSite(mainPage);
-        cy.visit(mainPage, { timeout: 3000000 })
+        //visitNewSite(Cypress.env('site_home_page'));
+        cy.visit(Cypress.env('site_home_page'), { timeout: 3000000 })
     });
     it("Landing cash booking", () => {
         landingBooking()
