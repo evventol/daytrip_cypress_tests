@@ -2,6 +2,7 @@
     "env": {
         "login_management": "https://management.sandbox.mydaytrip.com/#/",
         "site_home_page": "https://sandbox.mydaytrip.com/",
+        "website_home_page":"https://website.staging.mydaytrip.net/",
         "prod_login_management": "https://management.mydaytrip.com/#/",
         "prod_site_home_page": "https://mydaytrip.com/",
         "oldsite_home_page": "/login"
