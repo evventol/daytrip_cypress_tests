@@ -18,8 +18,8 @@ describe("Smoke management", () => {
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder(0, 1);
-        ord.assignVehicle("sedan", "€558");
-        ord.checkPriceCreateOrder("558 + 140 = 698");
+        ord.assignVehicle("sedan", "€559");
+        ord.checkPriceCreateOrder("559 + 140 = 699");
         ord.editOrder();
         ord.editLocation(1, "bramber", "Bramberg, Austria", "min");
         ord.acceptAndConfirmOrder()
@@ -32,8 +32,8 @@ describe("Smoke management", () => {
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder(0, 1);
         ord.editLocation(0, "bramber", "Bramberg, Austria", "km)");
-        ord.assignVehicle("sedan", "€834");
-        ord.checkPriceCreateOrder("834 + 209 = 1043");
+        ord.assignVehicle("sedan", "€837");
+        ord.checkPriceCreateOrder("837 + 210 = 1047");
         ord.cancelOrder();
     })
     it("C84 smoke-assign tools", () => {
