@@ -35,7 +35,7 @@ describe("Smoke newsite", () => {
     });
     it("Landing cash booking", () => {
         landingBooking()
-        configurateWithoutLocation("€226");
+        configurateWithoutLocation("226");
         fillEmail();
         fillPassengerInfo();
         finishCashBooking();
@@ -45,7 +45,7 @@ describe("Smoke newsite", () => {
         startBooking();
         cy.contains('Your 10% travel agent discount', { timeout: 5000 })
         cy.reload()
-        configurateWithLocation(locationTime[0], '311');
+        configurateWithLocation(locationTime[0], '311','61');
         fillTAEmail();
         fillPassengerInfo();
         basicPayment();
@@ -53,13 +53,13 @@ describe("Smoke newsite", () => {
     });
     it("Draft booking", () => {
         cy.visit(configurationPage);
-        configurateWithoutLocation("€79");
+        configurateWithoutLocation("79");
         fillEmail();
     })
     it('Urgent booking', () => {
         let newURL = nextDayConfiguration();
         cy.visit(newURL, { timeout: 100000 });
-        configurateWithoutLocation("€79");
+        configurateWithoutLocation("79");
         fillEmail();
         fillPassengerInfo();
         basicPayment();
@@ -70,7 +70,7 @@ describe("Smoke newsite", () => {
         loginAsCustomer()
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
-        configurateWithLocation(locationTime[1], "118");
+        configurateWithLocation(locationTime[1], "118",'20');
         fillTAEmail();
         cy.wait(1000)
         fillPreCustomerInfo('test');

@@ -16,16 +16,16 @@ export function addStop(beforPrice, stopPrice, afterPrice) {
     cy.contains(locationPrice).dblclick();
     cy.contains(afterPrice)
 }
-export function configurateWithLocation(time, mpvPrice) {
+export function configurateWithLocation(time, mpvPrice,mpvUpdatePrice) {
     addStop(time[0], time[1], time[2])
     cy.wait(1000)
-    cy.contains('Upgrade to a Mpv', { timeout: 15000 }).click({ force: true })
+    cy.contains('Upgrade to a MPV for €'+mpvUpdatePrice, { timeout: 15000 }).click({ force: true })
     cy.contains(mpvPrice)
     cy.contains("Book your trip for").click({ force: true });
     cy.contains('Complete your booking', { timeout: 5000 }).should('be.visible')
 }
 export function configurateWithoutLocation(price) {
-    cy.contains("Book your trip for " + price, { timeout: 10000 }).click({ force: true });
+    cy.contains("Book your trip for "+"€"+ price, { timeout: 10000 }).click({ force: true });
     cy.contains('No sights selected', { timeout: 50000 }).should("be.visible")
     cy.contains("Book without sights", { timeout: 50000 }).should("be.visible").click({ force: true })
     cy.contains('Complete your booking', { timeout: 50000 }).should('be.visible')

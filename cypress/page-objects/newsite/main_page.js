@@ -9,7 +9,7 @@ export function landingBooking() {
     chooseTime(":00")
         //book trip
     cy.contains('Search').first().click()
-    cy.contains('Search routes', { timeout: 5000 }).should('be.visible')
+    cy.contains('Route', { timeout: 5000 }).should('be.visible')
 }
 export function loginAsTA() {
     cy.get('button').contains('My Booking').click()
@@ -38,12 +38,12 @@ export function chooseOriginDestination(flag, shortname, fullName) {
     switch (flag) {
         case 0:
             { //ns origin
-                cy.get('input[placeholder="From.."]', { timeout: 10000 }).first().type(shortname)
+                cy.get('input[placeholder="From…"]', { timeout: 10000 }).first().type(shortname)
                 break;
             }
         case 1:
             { //ns destination
-                cy.get('input[placeholder="..and go"]', { timeout: 10000 }).first().type(shortname)
+                cy.get('input[placeholder="…to"]', { timeout: 10000 }).first().type(shortname)
                 break;
             }
         case 2:
@@ -65,28 +65,29 @@ export function checkPassenger(adultsNum, childrenNum, luggageNum) {
     cy.get('button').contains(' passengers').click({ force: true })
     cy.contains('Adults:', { timeout: 5000 })
     for (let i = 0; i < adultsNum; i++) {
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
+        //:nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
     }
     for (let i = 0; i < childrenNum; i++) {
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
     }
     for (let i = 0; i < luggageNum; i++) {
-        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > .gcClbJ').dblclick({ force: true })
-        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > .jSQduZ').click({ force: true })
+        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
+        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
     }
-    cy.get('body').click()
+    cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11').click({force:true})
 }
 export function chooseDate(numMonth, date, currentDate) { //numMonth - number of month in future, date-day in month, currentDate - current date
     cy.get('button').contains(currentDate).click({ force: true })
-    cy.get('.EkxpA').click({ force: true })
-    cy.get('.ehehoX').click({ force: true })
+    cy.get('.fffOKh').click({ force: true })
+    cy.get('.dIbboq').click({ force: true })
     if (numMonth == 0) {
         cy.contains(date).click({ force: true })
     } else {
         for (let i = 0; i < numMonth; i++) {
-            cy.get('.EkxpA').click({ force: true })
+            cy.get('.fffOKh').click({ force: true })
         }
         cy.contains(date).click({ force: true })
     }
@@ -97,14 +98,14 @@ export function chooseTime(time) {
         //change am to pm
     cy.get('.TimePickerTimeViewstyles__TimePickerTimeViewPhaseSwitchButton-pbft0o-7').click({ force: true })
         //+2 hour
-    cy.get(':nth-child(1) > .kkYFXX').dblclick({ force: true })
+    cy.get(':nth-child(1) > .dVxJJi').dblclick({ force: true })
         //-1 hour
-    cy.get(':nth-child(1) > .bKdPNI').click({ force: true })
+    cy.get(':nth-child(1) > .bdfgRd').click({ force: true })
         //+30 min
-    cy.get(':nth-child(3) > .kkYFXX').dblclick({ force: true })
+    cy.get(':nth-child(3) > .dVxJJi').dblclick({ force: true })
         //-15 min
-    cy.get(':nth-child(3) > .bKdPNI').click({ force: true })
-    cy.get('body').click()
+    cy.get(':nth-child(3) > .bdfgRd').click({ force: true })
+    cy.get('body').click({ force: true })
 }
 export function acceptPolicy() {
     cy.contains('Accept', { timeout: 30000 }).should('be.visible')
@@ -127,5 +128,5 @@ export function startBooking() {
     chooseTime(":00")
         //book trip
     cy.contains('Search').first().click()
-    cy.contains('Search routes', { timeout: 5000 }).should('be.visible')
+    cy.contains('Route', { timeout: 5000 }).should('be.visible')
 }

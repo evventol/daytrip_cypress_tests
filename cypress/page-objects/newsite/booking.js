@@ -22,7 +22,8 @@ export function fillTAInfo() {
     //not done
 }
 export function fillTAEmail() {
-    cy.wait(1500)
+    cy.get('input[placeholder="e.g. john@brown.com"]')
+    cy.wait(2500)
     cy.contains("Save and continue").click({ force: true });
     cy.contains("Lead passenger", { timeout: 10000 }).should("be.visible");
 }
