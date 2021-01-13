@@ -23,12 +23,15 @@ jobs:
       script:
         - npm run start:ci &
         - npm run smoke
+        - kill $(jobs -p) || true
     - stage: site
        script:
         - npm run start:ci &
         - npm run site
+        - kill $(jobs -p) || true
     - stage: management
        script:
         - npm run start:ci &
         - npm run management
+        - kill $(jobs -p) || true
 
