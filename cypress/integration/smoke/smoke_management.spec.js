@@ -29,16 +29,6 @@ describe("Smoke management", () => {
         ord.createPaymentRequest()
             //ord.payPaymentRequest()
     });
-    it('create order with location', () => {
-        let price=ord.orderPrice(837)
-        login.managerRoot();
-        navig.goToNewOrderPage();
-        ord.fillInfoOfOrder(0, 1);
-        ord.editLocation(0, locatoins[0]);
-        ord.assignVehicle(vehicle[0], price[0].toString());
-        ord.checkPriceCreateOrder(price);
-        ord.cancelOrder();
-    })
     it("C84 smoke-assign tools", () => {
         const at = new Assignation();
         login.managerRoot();
@@ -59,10 +49,22 @@ describe("Smoke management", () => {
     });
     it("C87 smoke-cancelling order", () => {
         login.managerRoot();
-        navig.goToOrderPage(1);
+        navig.goToOrderPage(0);
         ord.cancelOrder();
         login.unlogin()
     });
+    it('create order with location', () => {
+        let price=ord.orderPrice(837)
+        login.managerRoot();
+        navig.goToNewOrderPage();
+        ord.fillInfoOfOrder(0, 1);
+        ord.editLocation(0, locatoins[0]);
+        ord.assignVehicle(vehicle[0], price[0].toString());
+        ord.checkPriceCreateOrder(price);
+        ord.cancelOrder();
+    })
+
+
     afterEach(() => {
         login.unlogin()
     })
