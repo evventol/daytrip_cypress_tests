@@ -19,10 +19,15 @@ cache:
 
 defaults: &smoke
   script:
-    - $(npm bin)/print-env TRAVIS
     - npm run start:ci &
     - npm run smoke
     - kill $(jobs -p) || true
+
+defaults: &site
+  script:
+    - npm run start:ci &
+    - npm run site
+    - kill $(jobs -p) || true    
 
 jobs:
   include:
@@ -30,3 +35,9 @@ jobs:
       env:
         - STAGE_NAME="smoke chrome on Travis CI"
       <<: *smoke
+jobs:
+  include:
+    - stage: test
+      env:
+        - STAGE_NAME="site chrome on Travis CI"
+      <<: *site

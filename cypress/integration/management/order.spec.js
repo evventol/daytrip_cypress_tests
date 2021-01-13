@@ -8,7 +8,7 @@ describe('Management order', () => {
     const login = new Login();
     const navig = new Navigation();
     const ord = new Order();
-    it.only('add booking', () => {
+    it.scip('add booking', () => {
         login.managerRoot();
         let i = 0;
         let j = 0;
