@@ -23,6 +23,7 @@ describe('Management order', () => {
                 ord.fillInfoOfOrder(i, j);
                 ord.assignVehicle("sedan", "€");
                 cy.wait(3000)
+                //will fix
                 ord.checkPriceCreateOrder("=");
                 cy.wait(1000)
                 ord.acceptAndConfirmOrder()
@@ -39,6 +40,7 @@ describe('Management order', () => {
                 ord.fillInfoOfOrder(i, j);
                 ord.assignVehicle("sedan", "$");
                 cy.wait(1000)
+                //will fix
                 ord.checkPriceCreateOrder("=");
                 cy.wait(1000)
                 ord.acceptAndConfirmOrder()

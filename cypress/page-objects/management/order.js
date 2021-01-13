@@ -28,16 +28,24 @@ export class Order {
         //destination
         subOrd.chooseStringToWrite(1, "destination", locations[destination][0], locations[destination][1]);
     }
+    orderPrice(driverPrive){
+        //calculation of prices on order page
+        let ourPrice= Math.round(driverPrive/3.985)
+        let totalPrice= driverPrive+ourPrice;
+        let price=[driverPrive,ourPrice,totalPrice]
+        return price
+    }
     assignVehicle(typeVeh, priceVeh) {
         cy.get("button")
             .contains("set recommended configuration ", { timeout: 5000 })
             .click();
         cy.contains("confirm", { timeout: 5000 }).click({ timeout: 5000 });
-        cy.contains(typeVeh + " " + priceVeh, { timeout: 10000 }).should('be.visible')
+        cy.contains(typeVeh + " €" + priceVeh, { timeout: 10000 }).should('be.visible')
     }
     checkPriceCreateOrder(price) {
+        let totalPriceString=price[0].toString()+" + "+price[1].toString()+" = "+price[2].toString()
         //check price
-        cy.contains(price, { timeout: 10000 });
+        cy.contains(totalPriceString, { timeout: 10000 });
         //create order
         cy.get("button", { timeout: 5000 })
             .contains("create", { timeout: 5000 })
@@ -45,22 +53,22 @@ export class Order {
         cy.contains("confirm").click();
         cy.contains("Created at:", { timeout: 30000 });
     }
-    editLocation(type, shortName, fullName, distance) {
+    editLocation(type, location) {
         //0- while creatng order
         //1 - after creating order
         if (type == 1) {
             cy.contains('status', { timeout: 20000 }).should('be.visible')
             cy.get("button", { timeout: 20000 }).contains("edit", { timeout: 20000 }).click();
             cy.contains('status', { timeout: 10000 }).should("be.visible")
-            cy.get('#react-select-12--value > .Select-placeholder', { timeout: 10000 }).type(shortName);
+            cy.get('#react-select-12--value > .Select-placeholder', { timeout: 10000 }).type(location[0]);
         } else {
             cy.contains('status', { timeout: 10000 }).should("be.visible")
-            cy.get('#react-select-21--value > .Select-placeholder', { timeout: 10000 }).type(shortName);
+            cy.get('#react-select-21--value > .Select-placeholder', { timeout: 10000 }).type(location[0]);
 
         }
-        cy.contains(fullName, { timeout: 5000 }).click({ force: true });
+        cy.contains(location[1], { timeout: 5000 }).click({ force: true });
         cy.get("button").contains(" add location from list").click();
-        cy.contains(distance, { timeout: 50000 });
+        cy.contains(location[2], { timeout: 50000 });
         if (type == 1) {
             cy.contains("save", { timeout: 10000 }).click();
             cy.contains("confirm", { timeout: 5000 }).click();

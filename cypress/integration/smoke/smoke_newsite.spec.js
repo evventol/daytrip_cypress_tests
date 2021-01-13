@@ -81,6 +81,5 @@ describe("Smoke newsite", () => {
     afterEach(() => {
         cy.clearCookies()
         cy.clearLocalStorage()
-        cy.reload()
     })
 });

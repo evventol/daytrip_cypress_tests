@@ -9,31 +9,34 @@ describe("Smoke management", () => {
     const login = new Login();
     const navig = new Navigation();
     const ord = new Order();
-
+    let locatoins=[["bramber", "Bramberg, Austria", "min"],]
+    let vehicle=["sedan","Mpv","Van"]
     beforeEach(() => {
         cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
 
     });
-    it("C83 smoke-create&change order", () => {
+    it.only("C83 smoke-create&change order", () => {
+        let price=ord.orderPrice(559)
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder(0, 1);
-        ord.assignVehicle("sedan", "€559");
-        ord.checkPriceCreateOrder("559 + 140 = 699");
+        ord.assignVehicle(vehicle[0], price[0].toString());
+        ord.checkPriceCreateOrder(price);
         ord.editOrder();
-        ord.editLocation(1, "bramber", "Bramberg, Austria", "min");
+        ord.editLocation(1, locatoins[0]);
         ord.acceptAndConfirmOrder()
         ord.assignDriver("yev", "Yev RM");
         ord.createPaymentRequest()
             //ord.payPaymentRequest()
     });
-    it('create order with location', () => {
+    it.only('create order with location', () => {
+        let price=ord.orderPrice(837)
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder(0, 1);
-        ord.editLocation(0, "bramber", "Bramberg, Austria", "km)");
-        ord.assignVehicle("sedan", "€837");
-        ord.checkPriceCreateOrder("837 + 210 = 1047");
+        ord.editLocation(0, locatoins[0]);
+        ord.assignVehicle(vehicle[0], price[0].toString());
+        ord.checkPriceCreateOrder(price);
         ord.cancelOrder();
     })
     it("C84 smoke-assign tools", () => {
@@ -54,7 +57,7 @@ describe("Smoke management", () => {
         login.companyRoot();
         dr.acceptDriver();
     });
-    it.skip("C87 smoke-cancelling order", () => {
+    it("C87 smoke-cancelling order", () => {
         login.managerRoot();
         navig.goToOrderPage(1);
         ord.cancelOrder();
