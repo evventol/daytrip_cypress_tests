@@ -15,7 +15,7 @@ describe("Smoke management", () => {
         cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
 
     });
-    it.only("C83 smoke-create&change order", () => {
+    it("C83 smoke-create&change order", () => {
         let price=ord.orderPrice(559)
         login.managerRoot();
         navig.goToNewOrderPage();
@@ -29,7 +29,7 @@ describe("Smoke management", () => {
         ord.createPaymentRequest()
             //ord.payPaymentRequest()
     });
-    it.only('create order with location', () => {
+    it('create order with location', () => {
         let price=ord.orderPrice(837)
         login.managerRoot();
         navig.goToNewOrderPage();
