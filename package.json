@@ -7,9 +7,12 @@
         "test-open": "./node_modules/.bin/cypress open",
         "test": "cypress run --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --browser chrome --headless",
         "smoke": " cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/*' --browser chrome --headless ",
+        "smoke-site": " cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/smoke_newsite.spec.js' --browser chrome --headless ",
+        "smoke-management": " cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/smoke_management.spec.js' --browser chrome --headless ",
         "smoke:electron": "cypress run  --spec 'cypress/integration/smoke/*'",
         "site": "cypress run  --spec 'cypress/integration/new_site/*.spec.js' --browser chrome --headless",
         "management":"cypress run  --spec 'cypress/integration/management/*.spec.js' --browser chrome --headless",
+        
         "ci": "run-s lint:ci ci:cy-run",
         "lint:ci": "ng lint",
         "ci:cy-run": "start-server-and-test ci:start-server 4200 cy:run",
