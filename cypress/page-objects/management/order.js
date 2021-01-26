@@ -16,13 +16,13 @@ export class Order {
                 ['boston', 'Boston, MA, United States'],
                 ['san francisco', 'San Francisco, CA, United States']
             ]
-            //subOrd.checkText(0);
-            //change month
-        // let month = subOrd.currentMonth();
-        // subOrd.chooseStringToWrite(0, month, "may", "May");
-        // //change year
-        // let year = subOrd.currentYear();
-        // subOrd.chooseStringToWrite(0, year, "2022", "2022");
+        subOrd.checkText(0);
+        //change month
+        let month = subOrd.currentMonth();
+        subOrd.chooseStringToWrite(0, month, "may", "May");
+        //change year
+        let year = subOrd.currentYear();
+        subOrd.chooseStringToWrite(0, year, "2022", "2022");
         //Prague - origin
         subOrd.chooseStringToWrite(1, "origin", locations[origin][0], locations[origin][1]);
         //destination
