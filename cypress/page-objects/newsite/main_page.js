@@ -20,8 +20,9 @@ export function loginAsTA() {
 
 }
 export function loginAsCustomer() {
+    let rand=Math.floor*(Math.random()*10000)
     cy.get('button').contains('My Booking').click()
-    cy.get('input[id="email"]').type('ev.test.ve@gmail.com')
+    cy.get('input[id="email"]').type('ev.test.ve+'+rand+'@gmail.com')
     cy.get('input[id="reference"]').type('56BA9C')
     cy.get('button').contains('Go to your trips').click()
 }
@@ -56,26 +57,28 @@ export function chooseOriginDestination(flag, shortname, fullName) {
                 cy.contains('... and go to', { timeout: 10000 }).type(shortname)
             }
     }
-    cy.wait(1500)
+    cy.wait(500)
         //choose sity
     cy.contains(fullName, { timeout: 10000 }).should('be.visible').click({ force: true })
 }
 export function checkPassenger(adultsNum, childrenNum, luggageNum) {
+
+    let plus= ".jpwWER";
+    let minus= ".gLwgGx";
     cy.contains('passengers')
     cy.get('button').contains(' passengers').click({ force: true })
     cy.contains('Adults:', { timeout: 5000 })
     for (let i = 0; i < adultsNum; i++) {
-        //:nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
+        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
     }
     for (let i = 0; i < childrenNum; i++) {
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
+        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
     }
     for (let i = 0; i < luggageNum; i++) {
-        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > .kSfsyM').dblclick({ force: true })
-        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > .JcLOI').click({ force: true })
+        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
+        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
     }
     cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11').click({force:true})
 }
