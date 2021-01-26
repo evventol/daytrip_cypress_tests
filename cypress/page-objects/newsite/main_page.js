@@ -20,9 +20,8 @@ export function loginAsTA() {
 
 }
 export function loginAsCustomer() {
-    let rand=Math.floor*(Math.random()*10000)
     cy.get('button').contains('My Booking').click()
-    cy.get('input[id="email"]').type('ev.test.ve+'+rand+'@gmail.com')
+    cy.get('input[id="email"]').type('ev.test.ve@gmail.com')
     cy.get('input[id="reference"]').type('56BA9C')
     cy.get('button').contains('Go to your trips').click()
 }

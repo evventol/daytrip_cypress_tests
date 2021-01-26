@@ -2,7 +2,8 @@
 
 
 export function fillEmail() {
-    cy.get("#lead-passenger-email").type("ev.test.ve@gmail.com");
+    let rand=Math.floor*(Math.random()*10000)
+    cy.get("#lead-passenger-email").type("ev.test.ve+"+rand+"@gmail.com");
     cy.contains("Save and continue").click();
     cy.contains("Lead passenger", { timeout: 10000 }).should("be.visible");
 }
