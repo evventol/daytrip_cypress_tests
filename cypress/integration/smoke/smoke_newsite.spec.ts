@@ -5,7 +5,7 @@ import {
     loginAsTA,
     loginAsCustomer,
     landingBooking
-} from "../../page-objects/newsite/main_page.js";
+} from "../../page-objects/newsite/main_page";
 import {
     fillEmail,
     fillPassengerInfo,
@@ -17,12 +17,12 @@ import {
     fillPreCustomerInfo,
     AMEXpayment,
     finish3DSecureBooking
-} from "../../page-objects/newsite/booking.js";
+} from "../../page-objects/newsite/booking";
 import {
     configurateWithLocation,
     configurateWithoutLocation,
     nextDayConfiguration
-} from "../../page-objects/newsite/configuration.js";
+} from "../../page-objects/newsite/configuration";
 let locationTime = [
     ["226", "€24", "250"],
     ["79", "€19", "98"]

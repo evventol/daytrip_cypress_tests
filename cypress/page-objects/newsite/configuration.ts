@@ -1,6 +1,6 @@
 /// <reference types = "cypress"/>
 
-export function checkPrice(CurNow, CurNext, price) {
+export function checkPrice(CurNow:string, CurNext:string, price:string) {
     //change currency
     cy.contains(CurNow).click({ force: true })
     cy.contains(CurNext).click({ force: true })
@@ -9,14 +9,14 @@ export function checkPrice(CurNow, CurNext, price) {
     cy.get('body').click()
 }
 
-export function addStop(beforPrice, stopPrice, afterPrice) {
+export function addStop(beforPrice:string, stopPrice:string, afterPrice:string) {
     cy.contains(beforPrice)
     let locationPrice = "Add for " + stopPrice
     cy.contains(locationPrice).should('be.visible')
     cy.contains(locationPrice).dblclick();
     cy.contains(afterPrice)
 }
-export function configurateWithLocation(time, mpvPrice,mpvUpdatePrice) {
+export function configurateWithLocation(time:any, mpvPrice:string,mpvUpdatePrice:string) {
     addStop(time[0], time[1], time[2])
     cy.wait(1000)
     cy.contains('Upgrade to a MPV for €'+mpvUpdatePrice, { timeout: 15000 }).click({ force: true })
@@ -24,7 +24,7 @@ export function configurateWithLocation(time, mpvPrice,mpvUpdatePrice) {
     cy.contains("Book your trip for").click({ force: true });
     cy.contains('Complete your booking', { timeout: 5000 }).should('be.visible')
 }
-export function configurateWithoutLocation(price) {
+export function configurateWithoutLocation(price:string) {
     cy.contains("Book your trip for "+"€"+ price, { timeout: 10000 }).click({ force: true });
     cy.contains('No sights selected', { timeout: 50000 }).should("be.visible")
     cy.contains("Book without sights", { timeout: 50000 }).should("be.visible").click({ force: true })

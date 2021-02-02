@@ -12,7 +12,7 @@ export class Login {
         this.enterCredentials('ev.test.ve+9696@gmail.com', 'L1yhL7LI')
         cy.contains('Waiting for your confirmation', { timeout: 150000 }).should('be.visible')
     }
-    enterCredentials(email, passw) {
+    enterCredentials(email:string, passw:string) {
         //enter email
         cy.get('input[name="email"]', { timeout: 10000 }).type(email)
             //enter password

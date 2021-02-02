@@ -1,9 +1,10 @@
 /// <reference types = "cypress"/>
+// @ts-check
 import { Login } from "../../page-objects/management/login";
 import { Navigation } from "../../page-objects/management/navigation";
 import { Order } from "../../page-objects/management/order";
 import { Assignation } from "../../page-objects/management/assignation";
-import { Driver } from "../../page-objects/management/driver";
+import { orderDriver } from "../../page-objects/management/orderDriver";
 
 describe("Smoke management", () => {
     const login = new Login();
@@ -37,13 +38,13 @@ describe("Smoke management", () => {
         at.assignCompany();
     });
     it("C85 smoke-accept trip as driver", () => {
-        const dr = new Driver();
+        const dr = new orderDriver();
         login.driverRoot();
         dr.acceptVehicle();
         dr.changeVehicle();
     });
     it("C86 smoke-accept trip as company", () => {
-        const dr = new Driver();
+        const dr = new orderDriver();
         login.companyRoot();
         dr.acceptDriver();
     });
@@ -62,6 +63,24 @@ describe("Smoke management", () => {
         ord.assignVehicle(vehicle[0], price[0].toString());
         ord.checkPriceCreateOrder(price);
         ord.cancelOrder();
+    })
+    it('visit all major pages',()=>{
+        let content=[['Countries','ISO'],['Locations','location '],['Routes','Route campaigns'],['Exports','export type'],['Translations','Batch'],['Numbering templates','Add']]
+        let drivers=[['Companies','drivers company'],['Assignation','Pick a date at top'],['Payouts','Mangopay'],['Payouts tool','Transfers'],['Drivers balances','Generated CSV files'],['Drivers assignations','status'],['Vehicle models','Touran'],['Document types','Create document type']]
+        let customers=[['Orders','Only Affiliate'],['Travel agents','%'],['Affiliate Partners','Search'],['Referral codes','referral from'],['Payments','Total count'],['Orders address check','Asked for correction'],['Blacklisted departures','Blacklisted departure dates']]
+        login.managerRoot();
+        content.forEach(page=>{
+            cy.contains(page[0]).click({force:true})
+            cy.contains(page[1]).should('be.visible')
+        })
+        drivers.forEach(page=>{
+            cy.contains(page[0]).click({force:true})
+            cy.contains(page[1]).should('be.visible')
+        })
+        customers.forEach(page=>{
+            cy.contains(page[0]).click({force:true})
+            cy.contains(page[1]).should('be.visible')
+        })
     })
 
 

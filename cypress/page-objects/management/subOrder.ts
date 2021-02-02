@@ -34,7 +34,7 @@ export class SubOrder {
         let year = date.getFullYear();
         return year;
     }
-    checkText(stage) {
+    checkText(stage:number) {
         if (stage == 0) {
             cy.contains("Basic info", { timeout: 6000 }).should("be.visible");
             cy.contains("TEST TEST1 <fake2@ondaytrip.com>", { timeout: 6000 }).should(
@@ -63,7 +63,7 @@ export class SubOrder {
             cy.contains("No claim requests found").should("be.visible");
         }
     }
-    clickOnStatusButton(position) {
+    clickOnStatusButton(position:string) {
         let button, confirmButton, status
         switch (position) {
             case "accept":
@@ -99,7 +99,7 @@ export class SubOrder {
         cy.contains(status, { timeout: 20000 })
     }
 
-    chooseStringToWrite(stringType, stringName, partName, fullName) {
+    chooseStringToWrite(stringType:number, stringName:string, partName:string, fullName:string) {
         let getTyp = "";
         if (stringType == 0) {
             getTyp = ".Select-value";

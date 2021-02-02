@@ -1,6 +1,6 @@
 /// <reference types = "cypress"/>
-import { chooseOriginDestination } from "../../page-objects/newsite/main_page.js";
-export function checkButtons(button, textOnPage) {
+import { chooseOriginDestination } from "../newsite/main_page.js";
+export function checkButtons(button:string, textOnPage:string) {
     cy.contains(button).click();
     cy.contains(textOnPage);
     cy.go("back");
@@ -22,7 +22,7 @@ export function acceptPolicy() {
         .contains("accept", { timeout: 30000 })
         .click({ force: true });
 }
-export function visitSite(page) {
+export function visitSite(page:string) {
     cy.visit(page, { timeout: 12000000 });
     acceptPolicy();
 }

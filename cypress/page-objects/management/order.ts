@@ -1,9 +1,9 @@
 /// <reference types = "cypress"/>
-import { SubOrder } from "../../page-objects/management/subOrder";
+import { SubOrder } from "./subOrder";
 const subOrd = new SubOrder();
 export class Order {
 
-    fillInfoOfOrder(origin, destination) {
+    fillInfoOfOrder(origin:number, destination:number) {
         let locations = [
                 ["lviv", "Lviv, Ukrain"],
                 ["vienna", "Vienna, Austria"],
@@ -19,30 +19,30 @@ export class Order {
         subOrd.checkText(0);
         //change month
         let month = subOrd.currentMonth();
-        subOrd.chooseStringToWrite(0, month, "may", "May");
+        subOrd.chooseStringToWrite(0, month.toString(), "may", "May");
         //change year
         let year = subOrd.currentYear();
-        subOrd.chooseStringToWrite(0, year, "2022", "2022");
+        subOrd.chooseStringToWrite(0, year.toString(), "2022", "2022");
         //Prague - origin
         subOrd.chooseStringToWrite(1, "origin", locations[origin][0], locations[origin][1]);
         //destination
         subOrd.chooseStringToWrite(1, "destination", locations[destination][0], locations[destination][1]);
     }
-    orderPrice(driverPrive){
+    orderPrice(driverPrive:number){
         //calculation of prices on order page
         let ourPrice= Math.round(driverPrive/3.985)
         let totalPrice= driverPrive+ourPrice;
         let price=[driverPrive,ourPrice,totalPrice]
         return price
     }
-    assignVehicle(typeVeh, priceVeh) {
+    assignVehicle(typeVeh:string, priceVeh:string) {
         cy.get("button")
             .contains("set recommended configuration ", { timeout: 5000 })
             .click();
         cy.contains("confirm", { timeout: 5000 }).click({ timeout: 5000 });
         cy.contains(typeVeh + " €" + priceVeh, { timeout: 10000 }).should('be.visible')
     }
-    checkPriceCreateOrder(price) {
+    checkPriceCreateOrder(price:any) {
         let totalPriceString=price[0].toString()+" + "+price[1].toString()+" = "+price[2].toString()
         //check price
         cy.contains(totalPriceString, { timeout: 10000 });
@@ -53,7 +53,7 @@ export class Order {
         cy.contains("confirm").click();
         cy.contains("Created at:", { timeout: 30000 });
     }
-    editLocation(type, location) {
+    editLocation(type:number, location:any) {
         //0- while creatng order
         //1 - after creating order
         if (type == 1) {
@@ -94,7 +94,7 @@ export class Order {
         subOrd.reloadPage();
     }
 
-    assignDriver(short_name, full_name) {
+    assignDriver(short_name:string, full_name:string) {
         //type firsts lettets of driver
         cy.contains("Select...", { timeout: 10000 }).type(short_name);
         //choose driver
@@ -110,12 +110,12 @@ export class Order {
         cy.contains('create payment request', { timeout: 10000 }).click()
         cy.contains('Create payment request', { timeout: 10000 }).should('be.visible')
         cy.get('textarea').type('description')
-        cy.get('span > input').type(100)
+        cy.get('span > input').type('100')
         cy.contains('create payment request').click()
         cy.contains('payment request url', { timeout: 10000 })
 
     }
-    payPaymentRequest() {
+    payPaymentRequest(text:string) {
         cy.get('#paymentRequestLink0').as('text')
         cy.visit(text)
             // cy.get('#paymentRequestLink0').then(($div)=>{

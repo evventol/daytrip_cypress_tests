@@ -9,12 +9,12 @@ export class Assignation {
         this.chooseTrip('Prague')
         this.assignPerson("Yev Test___Comp");
     }
-    assignPerson(name) {
+    assignPerson(name:string) {
         cy.get('.aWVx7n4fOpKnlxaIVfpRw', { timeout: 50000 }).contains(name, { timeout: 50000 }).dblclick({ force: true });
         cy.contains("Confirm assignation", { timeout: 10000 }).click();
         cy.wait(1000)
     }
-    chooseTrip(name) {
+    chooseTrip(name:string) {
         cy.get('._27UCb35ugAf8QevQ0a7_H8', { timeout: 50000 }).contains(name).click({ force: true })
     }
 }

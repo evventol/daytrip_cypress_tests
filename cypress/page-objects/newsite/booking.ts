@@ -2,7 +2,7 @@
 
 
 export function fillEmail() {
-    let rand=Math.floor*(Math.random()*10000)
+    let rand=Math.floor(Math.random()*10000)
     cy.get("#lead-passenger-email").type("ev.test.ve+"+rand+"@gmail.com");
     cy.contains("Save and continue").click();
     cy.contains("Lead passenger", { timeout: 10000 }).should("be.visible");
@@ -15,7 +15,7 @@ export function fillPassengerInfo() {
     cy.get('input[placeholder="YYYY"]').type("2000");
     cy.get("#phone").type("4155552671");
 }
-export function fillPreCustomerInfo(firstName) {
+export function fillPreCustomerInfo(firstName:string) {
     cy.contains(firstName, { timeout: 5000 })
 
 }
@@ -37,7 +37,7 @@ export function MasterCardPayment() {
 export function basicPayment() {
     fillCard('5555555555554444', '111')
 }
-export function fillCard(cardNumber, cvv) {
+export function fillCard(cardNumber:string, cvv:string) {
     cy.get("#cc-number").type(cardNumber);
     cy.get("#cc-exp").type("1223");
     cy.get("#cc-csc").type(cvv);

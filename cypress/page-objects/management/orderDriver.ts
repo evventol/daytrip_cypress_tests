@@ -1,5 +1,5 @@
 /// <reference types = "cypress"/>
-export class Driver {
+export class orderDriver {
     acceptVehicle() {
         cy.contains('accept',{timeout:10000}).click()
         this.chooseVehicle()
@@ -11,7 +11,7 @@ export class Driver {
         this.chooseVehicle()
         cy.contains(' save').click()
     }
-    chooseDriver(name) {
+    chooseDriver(name:string) {
         cy.get('.Select-placeholder').first().click()
         cy.contains(name).click()
     }

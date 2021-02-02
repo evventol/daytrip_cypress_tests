@@ -25,7 +25,7 @@ export function loginAsCustomer() {
     cy.get('input[id="reference"]').type('56BA9C')
     cy.get('button').contains('Go to your trips').click()
 }
-export function goToPageAndBack(link, checkString) {
+export function goToPageAndBack(link:string, checkString:string) {
 
     cy.contains(link).click({ force: true })
     if (link != 'Blog') {
@@ -34,7 +34,7 @@ export function goToPageAndBack(link, checkString) {
     } else {}
 }
 
-export function chooseOriginDestination(flag, shortname, fullName) {
+export function chooseOriginDestination(flag:number, shortname:string, fullName:string) {
     switch (flag) {
         case 0:
             { //ns origin
@@ -60,7 +60,7 @@ export function chooseOriginDestination(flag, shortname, fullName) {
         //choose sity
     cy.contains(fullName, { timeout: 10000 }).should('be.visible').click({ force: true })
 }
-export function checkPassenger(adultsNum, childrenNum, luggageNum) {
+export function checkPassenger(adultsNum:number, childrenNum:number, luggageNum:number) {
 
     let plus= ".jpwWER";
     let minus= ".gLwgGx";
@@ -81,7 +81,7 @@ export function checkPassenger(adultsNum, childrenNum, luggageNum) {
     }
     cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11').click({force:true})
 }
-export function chooseDate(numMonth, date, currentDate) { //numMonth - number of month in future, date-day in month, currentDate - current date
+export function chooseDate(numMonth:number, date:number, currentDate:string) { //numMonth - number of month in future, date-day in month, currentDate - current date
     cy.get('button').contains(currentDate).click({ force: true })
     cy.get('.fffOKh').click({ force: true })
     cy.get('.dIbboq').click({ force: true })
@@ -94,7 +94,7 @@ export function chooseDate(numMonth, date, currentDate) { //numMonth - number of
         cy.contains(date).click({ force: true })
     }
 }
-export function chooseTime(time) {
+export function chooseTime(time:string) {
     //click on time
     cy.get('button').contains(time).click({ force: true })
         //change am to pm
@@ -114,7 +114,7 @@ export function acceptPolicy() {
         //accept terms of use
     cy.get('button').contains('Accept').click({ force: true })
 }
-export function visitNewSite(site) {
+export function visitNewSite(site:string) {
     cy.visit(site, { timeout: 3000000 })
     acceptPolicy()
 }
