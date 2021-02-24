@@ -27,8 +27,8 @@ let locationTime = [
     ["226", "€24", "250"],
     ["79", "€19", "98"]
 ]
-
-const configurationPage = Cypress.env('website_home_page') + "configurator?adults=2&children=0&currency=0&departureAt=1655359200000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0"
+//https://website.staging.mydaytrip.net/
+const configurationPage = Cypress.env('website_home_page') + "configurator?adults=2&children=0&currency=1&departureAt=1637226000000&isOtherDirection=true&luggage=2&passengers=2&routeId=dc787d17-8146-438a-9be7-07fe1153b354&vehicles=0"
 describe("Smoke newsite", () => {
     beforeEach(() => {
         //visitNewSite(Cypress.env('website_home_page'));
@@ -76,7 +76,7 @@ describe("Smoke newsite", () => {
         cy.wait(1000)
         fillPreCustomerInfo('test');
         AMEXpayment();
-        //finish3DSecureBooking();
+        finish3DSecureBooking();
 
     })
     afterEach(() => {

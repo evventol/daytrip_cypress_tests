@@ -17,7 +17,7 @@ describe("Smoke management", () => {
 
     });
     it("C83 smoke-create&change order", () => {
-        let price=ord.orderPrice(559)
+        let price=ord.orderPrice(560)
         login.managerRoot();
         navig.goToNewOrderPage();
         ord.fillInfoOfOrder(0, 1);
@@ -54,16 +54,6 @@ describe("Smoke management", () => {
         ord.cancelOrder();
         login.unlogin()
     });
-    it('create order with location', () => {
-        let price=ord.orderPrice(837)
-        login.managerRoot();
-        navig.goToNewOrderPage();
-        ord.fillInfoOfOrder(0, 1);
-        ord.editLocation(0, locatoins[0]);
-        ord.assignVehicle(vehicle[0], price[0].toString());
-        ord.checkPriceCreateOrder(price);
-        ord.cancelOrder();
-    })
     it('visit all major pages',()=>{
         let content=[['Countries','ISO'],['Locations','location '],['Routes','Route campaigns'],['Exports','export type'],['Translations','Batch'],['Numbering templates','Add']]
         let drivers=[['Companies','drivers company'],['Assignation','Pick a date at top'],['Payouts','Mangopay'],['Payouts tool','Transfers'],['Drivers balances','Generated CSV files'],['Drivers assignations','status'],['Vehicle models','Touran'],['Document types','Create document type']]

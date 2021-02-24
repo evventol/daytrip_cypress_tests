@@ -50,21 +50,21 @@ export function fillCard(cardNumber:string, cvv:string) {
 }
 export function finishCardBooking() {
     cy.contains("Confirm and pay").click();
-    cy.contains("Your booking is confirmed!", { timeout: 150000 });
+    cy.contains("Your booking is confirmed!", { timeout: 150000 }).should('be.visible');
 }
 export function finish3DSecureBooking() {
     cy.contains("Confirm and pay").click();
     cy.get('input[id="code"]', { timeout: 10000 }).type('MANGOPAY123')
     cy.contains('Submit').click()
-    cy.contains("Your booking is confirmed!", { timeout: 150000 });
+    cy.contains("Your booking is confirmed!", { timeout: 150000 }).should('be.visible');
 }
 export function finishCashBooking() {
     cy.contains("Cash").click({ force: true });
     cy.contains("Confirm your booking").click({ force: true });
-    cy.contains("Your booking is confirmed!", { timeout: 150000 });
+    cy.contains("Your booking is confirmed!", { timeout: 150000 }).should('be.visible');
 }
 export function finishUrgentCardBooking() {
     cy.contains("Confirm and pay").should('be.visible').click({ force: true });
     cy.wait(500)
-    cy.contains("We’re looking for a driver", { timeout: 150000 });
+    cy.contains("We’re looking for a driver", { timeout: 150000 }).should('be.visible');
 }

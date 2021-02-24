@@ -16,7 +16,7 @@ describe("creating content", () => {
         loc.removeLocation()
     })
 
-    it.only('Create&edit route',()=>{
+    it('Create&edit route',()=>{
     const route=new Route()
     route.createRoute('lviv','luxembourg')
     route.editRoute()

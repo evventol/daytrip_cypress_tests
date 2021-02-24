@@ -6,33 +6,27 @@ describe("Smoke management", () => {
     const login = new Login();
     const navig = new Navigation();
     const driver = new Driver();
+    let countries: string[] = ['United State','Italy','India','Czech Republic',"Cambodia"]
 
     beforeEach(() => {
         cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
 
     });
-    it("Create driver", () => {
+    it("Create driver & add vehicle", () => {
         login.managerRoot()
         cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-        driver.createDriver('United States')
+        driver.createDriver(countries[4])
         driver.activiteDriver()
         driver.editDriver()
-        driver.removeDriver()
-    })
-    it.skip("Create BI",()=>{
-        login.managerRoot()
-        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-        driver.createDriver('United States')
-        driver.createNewBI(0,"United States")
-        cy.get('._2Mg2sOHh_RwI78WmpEU0ku').contains('Profile').click()
-        driver.removeDriver()
-    })
-    it.only("Add vehilce",()=>{
-        login.managerRoot()
-        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-        driver.createDriver('United States')
-        driver.activiteDriver()
         driver.addNewVehicle('Nissan','Juke')
         driver.removeDriver()
     })
+    it("Create BI",()=>{
+        login.managerRoot()
+        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+        driver.createDriver(countries[0])
+        driver.createNewBI(1,countries[2])
+        driver.removeDriver()
+    })
+
 })

@@ -22,6 +22,7 @@ export class Order {
         subOrd.chooseStringToWrite(0, month.toString(), "may", "May");
         //change year
         let year = subOrd.currentYear();
+        cy.contains(year).should('be.visible')
         subOrd.chooseStringToWrite(0, year.toString(), "2022", "2022");
         //Prague - origin
         subOrd.chooseStringToWrite(1, "origin", locations[origin][0], locations[origin][1]);
