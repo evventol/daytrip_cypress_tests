@@ -54,13 +54,13 @@ describe("Smoke newsite", () => {
     });
     it("Draft booking", () => {
         cy.visit(configurationPage);
-        configurateWithoutLocation("79");
+        configurateWithoutLocation("226");
         fillEmail();
     })
     it('Urgent booking', () => {
         let newURL = nextDayConfiguration();
         cy.visit(newURL, { timeout: 100000 });
-        configurateWithoutLocation("79");
+        configurateWithoutLocation("226");
         fillEmail();
         fillPassengerInfo();
         basicPayment();
