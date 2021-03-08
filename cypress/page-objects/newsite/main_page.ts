@@ -29,8 +29,10 @@ export function goToPageAndBack(link:string, checkString:string) {
 
     cy.contains(link).click({ force: true })
     if (link != 'Blog') {
-        cy.contains(checkString)
+        cy.contains(checkString,{timeout:15000}).should('be.visible')
+        cy.wait(50)
         cy.go('back')
+        cy.contains('One-way',{timeout:20000}).should('be.visible')
     } else {}
 }
 
@@ -56,7 +58,7 @@ export function chooseOriginDestination(flag:number, shortname:string, fullName:
                 cy.contains('... and go to', { timeout: 10000 }).type(shortname)
             }
     }
-    cy.wait(500)
+    cy.wait(100)
         //choose sity
     cy.contains(fullName, { timeout: 10000 }).should('be.visible').click({ force: true })
 }

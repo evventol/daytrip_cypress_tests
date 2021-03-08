@@ -6,19 +6,16 @@ export function checkPrice(CurNow:string, CurNext:string, price:string) {
     cy.contains(CurNext).click({ force: true })
         //check price in usd
     cy.contains('Book your trip').contains(price)
-    cy.get('body').click()
 }
 
-export function addStop(beforPrice:string, stopPrice:string, afterPrice:string) {
-    cy.contains(beforPrice)
-    let locationPrice = "Add for " + stopPrice
+export function addStop(price:any) {
+    cy.get('button').contains('Book your trip for €'+price[0],{timeout:20000})
+    let locationPrice = "Add for €" + price[1]
     cy.contains(locationPrice).should('be.visible')
     cy.contains(locationPrice).dblclick();
-    cy.contains(afterPrice)
+    cy.get('button').contains('Book your trip for €'+price[2],{timeout:20000})
 }
-export function configurateWithLocation(time:any, mpvPrice:string,mpvUpdatePrice:string) {
-    addStop(time[0], time[1], time[2])
-    cy.wait(1000)
+export function configurateWithLocation(mpvPrice:string,mpvUpdatePrice:string) {
     cy.contains('Upgrade to a MPV for €'+mpvUpdatePrice, { timeout: 15000 }).click({ force: true })
     cy.contains(mpvPrice)
     cy.contains("Book your trip for").click({ force: true });

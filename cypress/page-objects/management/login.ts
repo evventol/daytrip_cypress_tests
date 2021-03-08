@@ -1,7 +1,7 @@
 /// <reference types = "cypress"/>
 export class Login {
     managerRoot() {
-        this.enterCredentials('evventol@gmail.com', 'gB8FqjkP')
+        this.enterCredentials('ev.test.ve+666@gmail.com', 'cM0PVRrD')
         cy.contains('You can create payment request for the customer here.')
     }
     driverRoot() {

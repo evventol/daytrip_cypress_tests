@@ -1,9 +1,9 @@
 /// <reference types = "cypress"/>
 
-import { loginToCI, goToCI } from "../../page-objects/site/CI_page";
-import { visitSite } from "../../page-objects/site/main_page";
-import { PassInfo } from "../../page-objects/site/booking_page";
-import { Configuration } from "../../page-objects/site/configuration";
+import { loginToCI, goToCI } from "../../page-objects/old_site/CI_page";
+import { visitSite } from "../../page-objects/old_site/main_page";
+import { PassInfo } from "../../page-objects/old_site/booking_page";
+import { Configuration } from "../../page-objects/old_site/configuration";
 const conf = new Configuration();
 const passInfo = new PassInfo();
 describe("old site-> CI", () => {

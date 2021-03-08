@@ -1,10 +1,10 @@
 /// <reference types = "cypress"/>
 
-import { PassInfo } from "../../page-objects/site/booking_page";
-import { Configuration } from "../../page-objects/site/configuration";
-import { StartBookingTrip, visitSite } from "../../page-objects/site/main_page";
-import { loginAsTA, loginToCI } from "../../page-objects/site/CI_page";
-import { cancelTrip } from "../../page-objects/site/confirmation_page";
+import { PassInfo } from "../../page-objects/old_site/booking_page";
+import { Configuration } from "../../page-objects/old_site/configuration";
+import { StartBookingTrip, visitSite } from "../../page-objects/old_site/main_page";
+import { loginAsTA, loginToCI } from "../../page-objects/old_site/CI_page";
+import { cancelTrip } from "../../page-objects/old_site/confirmation_page";
 const passInfo = new PassInfo();
 const conf = new Configuration();
 describe("Smoke site", () => {

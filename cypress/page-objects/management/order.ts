@@ -31,7 +31,7 @@ export class Order {
     }
     orderPrice(driverPrive:number){
         //calculation of prices on order page
-        let ourPrice= Math.round(driverPrive/3.985)
+        let ourPrice= Math.floor(driverPrive/3.985)
         let totalPrice= driverPrive+ourPrice;
         let price=[driverPrive,ourPrice,totalPrice]
         return price

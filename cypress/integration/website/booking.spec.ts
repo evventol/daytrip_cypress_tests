@@ -1,10 +1,18 @@
 /// <reference types = "cypress"/>
 
-import { fillEmail,fillPassengerInfo,basicPayment } from '../../page-objects/newsite/booking.js'
-import { visitNewSite } from '../../page-objects/newsite/main_page.js'
+import { fillEmail,fillPassengerInfo,basicPayment } from '../../page-objects/newsite/booking'
+import { visitNewSite } from '../../page-objects/newsite/main_page'
 describe('new site-> booking page', () => {
+    const configurationPage = Cypress.env('website_home_page')
     beforeEach(() => {
-        visitNewSite('https://website.staging.mydaytrip.net/booking?adults=2&children=0&currency=0&departureAt=1655337600000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0')
+        if (Cypress.env('CI')==1){
+            cy.visit(Cypress.env('website_home_page'), { timeout: 3000000 })
+        }
+        else{
+        visitNewSite(
+            configurationPage+"booking?adults=2&children=0&currency=0&departureAt=1655337600000&isOtherDirection=true&luggage=2&passengers=2&routeId=7c939590-b3ae-4523-92b6-44189180d13a&vehicles=0"
+        );
+        }
     })
     
 

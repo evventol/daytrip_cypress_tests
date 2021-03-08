@@ -12,7 +12,7 @@ describe('Management order', () => {
         cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
 
     });
-    it('add booking', () => {
+    it.skip('add booking', () => {
         login.managerRoot();
         let i = 0;
         let j = 0;

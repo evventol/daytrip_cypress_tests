@@ -19,16 +19,11 @@ cache:
     
 jobs:
   include:
-    - stage: smoke-site
+    - stage: smoke
       script:
         - npm run start:ci &
-        - npm run smoke-site
-        - kill $(jobs -p) || true
-    - stage: smoke-management
-      script:
-        - npm run start:ci &
-        - npm run smoke-management
-        - kill $(jobs -p) || true        
+        - npm run smoke:CI
+        - kill $(jobs -p) || true      
     - stage: site
       script:
         - npm run start:ci &

@@ -17,6 +17,8 @@ export class Location {
         cy.contains('Routes containing',{timeout:15000}).should('be.visible')
     }
     removeLocation(){
+        cy.contains('delete location').should('be.visible')
+        cy.wait(3000)
         cy.contains('delete location').click()
         cy.contains('confirm').click()
     }

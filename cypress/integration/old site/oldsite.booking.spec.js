@@ -1,7 +1,7 @@
 /// <reference types = "cypress"/>
 
-import { PassInfo } from '../../page-objects/site/booking_page'
-import { visitSite } from "../../page-objects/site/main_page";
+import { PassInfo } from '../../page-objects/old_site/booking_page'
+import { visitSite } from "../../page-objects/old_site/main_page";
 const passInfo = new PassInfo()
 describe('old site-> booking page', () => {
     beforeEach(()=>{

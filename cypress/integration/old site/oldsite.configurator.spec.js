@@ -1,7 +1,7 @@
 /// <reference types = "cypress"/>
 
-import { visitSite } from "../../page-objects/site/main_page";
-import { Configuration } from "../../page-objects/site/configuration";
+import { visitSite } from "../../page-objects/old_site/main_page";
+import { Configuration } from "../../page-objects/old_site/configuration";
 const conf = new Configuration();
 describe("old site-> main page", () => {
   beforeEach(() => {
