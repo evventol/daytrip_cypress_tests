@@ -27,7 +27,7 @@ jobs:
     - stage: site
       script:
         - npm run start:ci &
-        - npm run site
+        - npm run site:CI
         - kill $(jobs -p) || true
     - stage: management
       script:

@@ -17,10 +17,4 @@ export function goToCI() {
   cy.reload(true);
   cy.wait(20000);
 }
-export function loginAsTA() {
-  cy.visit("https://sandbox.mydaytrip.com/travel-agent/login");
-  cy.get('input[type="email"]').type("ev.test.ve+302@gmail.com");
-  cy.get('input[type="password"]').type("afq2t8N9");
-  cy.get("button").contains("Log in").click();
-  cy.contains('All your bookings',{timeout:10000})
-}
+

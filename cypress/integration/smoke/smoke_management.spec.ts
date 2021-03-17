@@ -54,7 +54,7 @@ describe("Smoke management", () => {
         ord.cancelOrder();
         login.unlogin()
     });
-    it('visit all major pages',()=>{
+    it('C170 visit all major pages',()=>{
         let content=[['Countries','ISO'],['Locations','location '],['Routes','Route campaigns'],['Exports','export type'],['Translations','Batch'],['Numbering templates','Add']]
         let drivers=[['Companies','drivers company'],['Assignation','Pick a date at top'],['Payouts','Mangopay'],['Payouts tool','Transfers'],['Drivers balances','Generated CSV files'],['Drivers assignations','status'],['Vehicle models','Touran'],['Document types','Create document type']]
         let customers=[['Orders','Only Affiliate'],['Travel agents','%'],['Affiliate Partners','Search'],['Referral codes','referral from'],['Payments','Total count'],['Orders address check','Asked for correction'],['Blacklisted departures','Blacklisted departure dates']]

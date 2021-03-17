@@ -40,7 +40,7 @@ describe("Smoke newsite", () => {
         }
     });
 
-    it("Landing cash booking", () => {
+    it("C165 Landing cash booking", () => {
         landingBooking()
 
         configurateWithoutLocation("226");
@@ -48,8 +48,8 @@ describe("Smoke newsite", () => {
         fillPassengerInfo();
         finishCashBooking();
     });
-    it("TA card booking", () => {
-        loginAsTA();
+    it("C166 TA card booking", () => {
+        loginAsTA("ev.test.ve+302@gmail.com","afq2t8N9");
         startBooking();
         cy.contains('Your 10% travel agent discount', { timeout: 5000 })
         //cy.reload()
@@ -61,14 +61,14 @@ describe("Smoke newsite", () => {
         basicPayment();
         finishCardBooking();
     });
-    it("Draft booking", () => {
+    it("C167 Draft booking", () => {
         cy.visit(configurationPage);
         cy.contains("USD",{timeout:20000}).should('be.visible').click()
         cy.contains('Euro').click()
         configurateWithoutLocation('226');
         fillEmail();
     })
-    it('Urgent booking', () => {
+    it('C168 Urgent booking', () => {
         let newURL = nextDayConfiguration();
         cy.visit(newURL, { timeout: 100000 });
         configurateWithoutLocation('79');
@@ -78,8 +78,8 @@ describe("Smoke newsite", () => {
         finishUrgentCardBooking();
 
     })
-    it('Customer booking', () => {
-        loginAsCustomer()
+    it('C169 Customer booking', () => {
+        loginAsCustomer('ev.test.ve@gmail.com','56BA9C')
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
         cy.contains("USD",{timeout:20000}).should('be.visible').click()

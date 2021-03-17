@@ -11,19 +11,22 @@ export function landingBooking() {
     cy.contains('Search').first().click()
     cy.contains('Route', { timeout: 5000 }).should('be.visible')
 }
-export function loginAsTA() {
+export function loginAsTA(email:string,password:string) {
     cy.get('button').contains('My Booking').click()
     cy.contains("I am a travel agent").click()
-    cy.get('input[id="login-email"]').type("ev.test.ve+302@gmail.com")
-    cy.get('input[id="login-password"]').type("afq2t8N9")
+    cy.contains('Book private transfers for your clients easily.',{timeout:10000}).should('be.visible')
+    cy.get('input[id="login-email"]').type(email)
+    cy.get('input[id="login-password"]').type(password)
     cy.get('button').contains('Sign in').click()
+    cy.contains('Account',{timeout:20000}).should('be.visible')
 
 }
-export function loginAsCustomer() {
+export function loginAsCustomer(email:string,reference:string) {
     cy.get('button').contains('My Booking').click()
-    cy.get('input[id="email"]').type('ev.test.ve@gmail.com')
-    cy.get('input[id="reference"]').type('56BA9C')
+    cy.get('input[id="email"]').type(email)
+    cy.get('input[id="reference"]').type(reference)
     cy.get('button').contains('Go to your trips').click()
+    cy.contains('Past trips',{timeout:100000})
 }
 export function goToPageAndBack(link:string, checkString:string) {
 
