@@ -50,8 +50,11 @@ describe("Smoke management", () => {
     });
     it("C87 smoke-cancelling order", () => {
         login.managerRoot();
-        navig.goToOrderPage(0);
+        let i=0;
+        for (i=0;i<3;i++){
+        navig.goToOrderPage(i);
         ord.cancelOrder();
+        }
         login.unlogin()
     });
     it('C170 visit all major pages',()=>{
@@ -62,14 +65,17 @@ describe("Smoke management", () => {
         content.forEach(page=>{
             cy.contains(page[0]).click({force:true})
             cy.contains(page[1]).should('be.visible')
+            cy.wait(100)
         })
         drivers.forEach(page=>{
             cy.contains(page[0]).click({force:true})
             cy.contains(page[1]).should('be.visible')
+            cy.wait(100)
         })
         customers.forEach(page=>{
             cy.contains(page[0]).click({force:true})
             cy.contains(page[1]).should('be.visible')
+            cy.wait(100)
         })
     })
 

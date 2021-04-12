@@ -41,7 +41,7 @@ export class Order {
             .contains("set recommended configuration ", { timeout: 5000 })
             .click();
         cy.contains("confirm", { timeout: 5000 }).click({ timeout: 5000 });
-        cy.contains(typeVeh + " €" + priceVeh, { timeout: 10000 }).should('be.visible')
+        cy.contains(typeVeh + " €" + priceVeh, { timeout: 20000 }).should('be.visible')
     }
     checkPriceCreateOrder(price:any) {
         let totalPriceString=price[0].toString()+" + "+price[1].toString()+" = "+price[2].toString()

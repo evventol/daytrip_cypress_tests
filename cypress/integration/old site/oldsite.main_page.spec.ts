@@ -1,6 +1,6 @@
 /// <reference types = "cypress"/>
 
-import { goToPageAndBack} from '../../page-objects/newsite/main_page.js'
+import { goToPageAndBack} from '../../page-objects/newsite/main_page'
 import { StartBookingTrip,visitSite } from '../../page-objects/old_site/main_page'
 describe('old site-> main page', () => {
     beforeEach(() => {

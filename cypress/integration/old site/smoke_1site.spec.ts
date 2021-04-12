@@ -3,11 +3,11 @@
 import { PassInfo } from "../../page-objects/old_site/booking_page";
 import { Configuration } from "../../page-objects/old_site/configuration";
 import { StartBookingTrip, visitSite } from "../../page-objects/old_site/main_page";
-import { loginAsTA, loginToCI } from "../../page-objects/old_site/CI_page";
+import {loginToCI } from "../../page-objects/old_site/CI_page";
 import { cancelTrip } from "../../page-objects/old_site/confirmation_page";
 const passInfo = new PassInfo();
 const conf = new Configuration();
-describe("Smoke site", () => {
+describe.skip("Smoke site", () => {
     beforeEach(() => {
         cy.visit("https://sandbox.mydaytrip.com", { timeout: 12000000 });
         //visitSite("https://sandbox.mydaytrip.com")
@@ -31,7 +31,6 @@ describe("Smoke site", () => {
         cy.contains('cancel the booking request now').click()
     });
     it("TA booking", () => {
-        loginAsTA();
         conf.navigateToConfiguratorPage();
         cy.reload()
         conf.bookLocation();

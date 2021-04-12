@@ -4,7 +4,9 @@ import {
     visitNewSite,
     loginAsTA,
     loginAsCustomer,
-    landingBooking
+    landingBooking,
+    goToPageAndBack,
+    checkPage
 } from "../../page-objects/newsite/main_page";
 import {
     fillEmail,
@@ -16,10 +18,12 @@ import {
     finishUrgentCardBooking,
     fillPreCustomerInfo,
     AMEXpayment,
-    finish3DSecureBooking
+    finish3DSecureBooking,
+    USDPayment,
+    MasterCardPayment
 } from "../../page-objects/newsite/booking";
 import {
-    configurateWithLocation,
+    vehicleMPVUpd,
     configurateWithoutLocation,
     nextDayConfiguration,
     addStop
@@ -29,20 +33,20 @@ let locationTime = [
     ["79", "19", "98"]
 ]
 
-const configurationPage = Cypress.env('website_home_page') + "configurator?adults=3&children=0&currency=1&departureAt=1637226000000&isOtherDirection=true&luggage=2&passengers=2&routeId=dc787d17-8146-438a-9be7-07fe1153b354&vehicles=0"
+const configurationPage = Cypress.env('site_home_page') + "configurator?adults=3&children=0&currency=0&departureAt=1637226000000&isOtherDirection=true&luggage=2&passengers=2&routeId=dc787d17-8146-438a-9be7-07fe1153b354&vehicles=0"
+const bookingPage = Cypress.env('site_home_page') + "checkout?orderId=4c3c6b8f-b6f5-4f43-b7b4-a97659cd87b4"
 describe("Smoke newsite", () => {
     beforeEach(() => {
         if (Cypress.env('CI')==1){
-            cy.visit(Cypress.env('website_home_page'), { timeout: 3000000 })
+            cy.visit(Cypress.env('site_home_page'), { timeout: 3000000 })
         }
         else{
-            visitNewSite(Cypress.env('website_home_page'));
+            visitNewSite(Cypress.env('site_home_page'));
         }
     });
 
     it("C165 Landing cash booking", () => {
         landingBooking()
-
         configurateWithoutLocation("226");
         fillEmail();
         fillPassengerInfo();
@@ -50,21 +54,20 @@ describe("Smoke newsite", () => {
     });
     it("C166 TA card booking", () => {
         loginAsTA("ev.test.ve+302@gmail.com","afq2t8N9");
-        startBooking();
-        cy.contains('Your 10% travel agent discount', { timeout: 5000 })
+        cy.visit(configurationPage);
+        cy.contains('Your 10% travel agent discount', { timeout: 20000 })
         //cy.reload()
         cy.wait(5000)
         addStop(locationTime[0])
-        configurateWithLocation('314','61');
+        vehicleMPVUpd('314','61');
         fillTAEmail();
         fillPassengerInfo();
         basicPayment();
         finishCardBooking();
     });
     it("C167 Draft booking", () => {
-        cy.visit(configurationPage);
-        cy.contains("USD",{timeout:20000}).should('be.visible').click()
-        cy.contains('Euro').click()
+        cy.reload()
+        startBooking('Prague','Berlin');
         configurateWithoutLocation('226');
         fillEmail();
     })
@@ -82,10 +85,8 @@ describe("Smoke newsite", () => {
         loginAsCustomer('ev.test.ve@gmail.com','56BA9C')
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
-        cy.contains("USD",{timeout:20000}).should('be.visible').click()
-        cy.contains('Euro').click()
         addStop(locationTime[0])
-        configurateWithLocation("314",'61');
+        vehicleMPVUpd('314','61');
         fillTAEmail();
         cy.wait(1000)
         fillPreCustomerInfo('test');
@@ -93,8 +94,38 @@ describe("Smoke newsite", () => {
         finish3DSecureBooking();
 
     })
+    it('MasterCard booking',()=>{
+        cy.visit(bookingPage)
+        MasterCardPayment()
+        finish3DSecureBooking();
+    })
+    it('USD booking',()=>{
+        startBooking('Boston','Bangor');
+        configurateWithoutLocation('621');
+        fillEmail();
+        fillPassengerInfo();
+        USDPayment()
+        finish3DSecureBooking();
+    })
+    it('check all major pages of site',()=>{
+        goToPageAndBack('All routes', 'Select a country')
+        goToPageAndBack('Company', 'Daytrip was founded in 2015')
+        goToPageAndBack('Discover', 'Discover the world with Daytrip')
+        goToPageAndBack('Blog', "")
+        goToPageAndBack('Terms of use', 'KEY DEFINITIONS')
+        goToPageAndBack('Privacy policy', 'This is Privacy Policy of DAYTRIP EUROPE')
+        goToPageAndBack('Request a custom route','Request a quote')
+        checkPage(Cypress.env('site_home_page')+'discover/location/prague','Most popular routes')
+        checkPage(Cypress.env('site_home_page')+'travel-agent/landing','Get 5% commission for every booking!')
+        checkPage(Cypress.env('site_home_page')+'partners/xoprivate','Get 10% commission for every booking!')
+        checkPage(Cypress.env('site_home_page')+'travel-voucher','travel voucher')
+        checkPage(Cypress.env('site_home_page')+'landing/prague-to-vienna','Trip Information')
+        checkPage(Cypress.env('site_home_page')+'discover/route/monterosso-al-mare-to-orvieto','Stop to discover these sights')
+        checkPage(Cypress.env('site_home_page')+'travel-agent/login','Book private transfers for your clients easily.')
+    })
     afterEach(() => {
         cy.clearCookies()
         cy.clearLocalStorage()
+        cy.wait(500)
     })
 });

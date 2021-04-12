@@ -1,25 +1,16 @@
 {
     "env": {
         "login_management": "https://management.sandbox.mydaytrip.com/#/",
-        "site_home_page": "https://sandbox.mydaytrip.com/",
-        "website_home_page":"https://website.staging.mydaytrip.net/",
+        "website_home_page": "https://sandbox.mydaytrip.com/",
+        "site_home_page":"https://website.staging.mydaytrip.net/",
         "prod_login_management": "https://management.mydaytrip.com/#/",
-        "prod_site_home_page": "https://mydaytrip.com/",
-        "oldsite_home_page": "/login"
+        "prod_site_home_page": "https://mydaytrip.com/"
     },
     "pageLoadTimeout": 120000,
     "defaultCommandTimeout": 10000,
     "requestTimeout": 15000,
     "responseTimeout": 100000,
     "video": false,
-    "reporter": "cypress-testrail-reporter",
-    "reporterOptions": {
-        "domain": "daytrip.testrail.io",
-        "username": "daytriptest@gmail.com",
-        "password": "u88CkI/yxoplCASoiAol",
-        "projectId": 2,
-        "suiteId": 1
-    },
     "projectId": "8poiq8",
     "chromeWebSecurity": false
 }

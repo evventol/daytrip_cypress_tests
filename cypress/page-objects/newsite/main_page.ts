@@ -36,7 +36,11 @@ export function goToPageAndBack(link:string, checkString:string) {
         cy.wait(50)
         cy.go('back')
         cy.contains('One-way',{timeout:20000}).should('be.visible')
-    } else {}
+    }
+}
+export function checkPage(link:string,content:string){
+    cy.visit(link)
+    cy.contains(content,{timeout:10000}).should('be.visible')
 }
 
 export function chooseOriginDestination(flag:number, shortname:string, fullName:string) {
@@ -51,15 +55,6 @@ export function chooseOriginDestination(flag:number, shortname:string, fullName:
                 cy.get('input[placeholder="…to"]', { timeout: 10000 }).first().type(shortname)
                 break;
             }
-        case 2:
-            { //site origin
-                cy.contains('I want', { timeout: 10000 }).first().type(shortname)
-                break;
-            }
-        case 3:
-            { //site destination
-                cy.contains('... and go to', { timeout: 10000 }).type(shortname)
-            }
     }
     cy.wait(100)
         //choose sity
@@ -67,51 +62,55 @@ export function chooseOriginDestination(flag:number, shortname:string, fullName:
 }
 export function checkPassenger(adultsNum:number, childrenNum:number, luggageNum:number) {
 
-    let plus= ".jpwWER";
-    let minus= ".gLwgGx";
+    let plus= ".iEsFce";
+    let minus= ".jHUKca";
     cy.contains('passengers')
     cy.get('button').contains(' passengers').click({ force: true })
     cy.contains('Adults:', { timeout: 5000 })
     for (let i = 0; i < adultsNum; i++) {
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
-        cy.get(':nth-child(1) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
+        cy.get(plus).eq(0).dblclick({ force: true })
+        cy.get(minus).eq(0).click({ force: true })
     }
     for (let i = 0; i < childrenNum; i++) {
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
-        cy.get(':nth-child(2) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
+        cy.get(plus).eq(1).dblclick({ force: true })
+        cy.get(minus).eq(1).click({ force: true })
     }
     for (let i = 0; i < luggageNum; i++) {
-        cy.get(':nth-child(3) >  .PassengersSelectorstyles__Actions-grmkku-11 > '+plus).dblclick({ force: true })
-        cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11 > '+minus).click({ force: true })
+        cy.get(plus).eq(2).dblclick({ force: true })
+        cy.get(minus).eq(2).click({ force: true })
     }
-    cy.get(':nth-child(3) > .PassengersSelectorstyles__Actions-grmkku-11').click({force:true})
+
 }
 export function chooseDate(numMonth:number, date:number, currentDate:string) { //numMonth - number of month in future, date-day in month, currentDate - current date
+    let plus= '.fffOKh';
+    let minus= '.dIbboq';
     cy.get('button').contains(currentDate).click({ force: true })
-    cy.get('.fffOKh').click({ force: true })
-    cy.get('.dIbboq').click({ force: true })
+    cy.get(plus).click({ force: true })
+    cy.get(minus).click({ force: true })
     if (numMonth == 0) {
         cy.contains(date).click({ force: true })
     } else {
         for (let i = 0; i < numMonth; i++) {
-            cy.get('.fffOKh').click({ force: true })
+            cy.get(plus).click({ force: true })
         }
         cy.contains(date).click({ force: true })
     }
 }
 export function chooseTime(time:string) {
+    let plus='.dVxJJi';
+    let minus='.bdfgRd'
     //click on time
     cy.get('button').contains(time).click({ force: true })
         //change am to pm
     cy.get('.TimePickerTimeViewstyles__TimePickerTimeViewPhaseSwitchButton-pbft0o-7').click({ force: true })
         //+2 hour
-    cy.get(':nth-child(1) > .dVxJJi').dblclick({ force: true })
+    cy.get(':nth-child(1) > '+plus).dblclick({ force: true })
         //-1 hour
-    cy.get(':nth-child(1) > .bdfgRd').click({ force: true })
+    cy.get(':nth-child(1) > '+minus).click({ force: true })
         //+30 min
-    cy.get(':nth-child(3) > .dVxJJi').dblclick({ force: true })
+    cy.get(':nth-child(3) > '+plus).dblclick({ force: true })
         //-15 min
-    cy.get(':nth-child(3) > .bdfgRd').click({ force: true })
+    cy.get(':nth-child(3) > '+minus).click({ force: true })
     cy.get('body').click({ force: true })
 }
 export function acceptPolicy() {
@@ -123,10 +122,10 @@ export function visitNewSite(site:string) {
     cy.visit(site, { timeout: 3000000 })
     acceptPolicy()
 }
-export function startBooking() {
+export function startBooking(origin:string,destination:string) {
     //choose origin and destination
-    chooseOriginDestination(0, 'prague', 'Prague')
-    chooseOriginDestination(1, 'berlin', 'Berlin')
+    chooseOriginDestination(0, origin, origin)
+    chooseOriginDestination(1, destination, destination)
         //add passenger info
     checkPassenger(1, 0, 0)
         //add date

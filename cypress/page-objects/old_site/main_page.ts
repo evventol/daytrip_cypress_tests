@@ -1,5 +1,5 @@
 /// <reference types = "cypress"/>
-import { chooseOriginDestination } from "../newsite/main_page.js";
+import { chooseOriginDestination } from "../newsite/main_page";
 export function checkButtons(button:string, textOnPage:string) {
     cy.contains(button).click();
     cy.contains(textOnPage);
