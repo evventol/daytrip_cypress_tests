@@ -43,6 +43,7 @@ describe("Smoke newsite", () => {
         else{
             visitNewSite(Cypress.env('site_home_page'));
         }
+        cy.reload()
     });
 
     it("C165 Landing cash booking", () => {
@@ -54,16 +55,14 @@ describe("Smoke newsite", () => {
     });
     it("C166 TA card booking", () => {
         loginAsTA("ev.test.ve+302@gmail.com","afq2t8N9");
-        cy.visit(configurationPage);
+        startBooking('Prague','Berlin');
         cy.contains('Your 10% travel agent discount', { timeout: 20000 })
-        //cy.reload()
-        cy.wait(5000)
         addStop(locationTime[0])
         vehicleMPVUpd('314','61');
         fillTAEmail();
         fillPassengerInfo();
         basicPayment();
-        finishCardBooking();
+        finish3DSecureBooking();
     });
     it("C167 Draft booking", () => {
         cy.reload()
@@ -72,6 +71,7 @@ describe("Smoke newsite", () => {
         fillEmail();
     })
     it('C168 Urgent booking', () => {
+        cy.reload()
         let newURL = nextDayConfiguration();
         cy.visit(newURL, { timeout: 100000 });
         configurateWithoutLocation('79');
@@ -82,6 +82,7 @@ describe("Smoke newsite", () => {
 
     })
     it('C169 Customer booking', () => {
+        cy.reload()
         loginAsCustomer('ev.test.ve@gmail.com','56BA9C')
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
@@ -95,7 +96,11 @@ describe("Smoke newsite", () => {
 
     })
     it('MasterCard booking',()=>{
-        cy.visit(bookingPage)
+
+        startBooking('Prague','Berlin');
+        configurateWithoutLocation('226');
+        fillEmail();
+        fillPassengerInfo();
         MasterCardPayment()
         finish3DSecureBooking();
     })

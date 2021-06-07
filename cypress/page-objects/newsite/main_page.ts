@@ -1,6 +1,7 @@
 /// <reference types = "cypress"/>
 export function landingBooking() {
     cy.visit('https://website.staging.mydaytrip.net/landing/prague-to-berlin')
+    cy.reload()
         //add passenger info
     checkPassenger(1, 0, 0)
         //add date
@@ -12,12 +13,12 @@ export function landingBooking() {
     cy.contains('Route', { timeout: 5000 }).should('be.visible')
 }
 export function loginAsTA(email:string,password:string) {
-    cy.get('button').contains('My Booking').click()
-    cy.contains("I am a travel agent").click()
+    cy.contains("I am a travel agent").should("be.visible").click()
     cy.contains('Book private transfers for your clients easily.',{timeout:10000}).should('be.visible')
     cy.get('input[id="login-email"]').type(email)
     cy.get('input[id="login-password"]').type(password)
     cy.get('button').contains('Sign in').click()
+    cy.wait(100)
     cy.contains('Account',{timeout:20000}).should('be.visible')
 
 }
@@ -33,9 +34,9 @@ export function goToPageAndBack(link:string, checkString:string) {
     cy.contains(link).click({ force: true })
     if (link != 'Blog') {
         cy.contains(checkString,{timeout:15000}).should('be.visible')
-        cy.wait(50)
+        cy.wait(500)
         cy.go('back')
-        cy.contains('One-way',{timeout:20000}).should('be.visible')
+        cy.contains('One-way',{timeout:50000}).should('be.visible')
     }
 }
 export function checkPage(link:string,content:string){
@@ -56,20 +57,18 @@ export function chooseOriginDestination(flag:number, shortname:string, fullName:
                 break;
             }
     }
-    cy.wait(100)
+    cy.wait(600)
         //choose sity
-    cy.contains(fullName, { timeout: 10000 }).should('be.visible').click({ force: true })
+    cy.contains(fullName).should('be.visible').click()
 }
 export function checkPassenger(adultsNum:number, childrenNum:number, luggageNum:number) {
-
     let plus= ".iEsFce";
     let minus= ".jHUKca";
-    cy.contains('passengers')
+    cy.contains('passengers',{timeout:20000}).should('be.visible')
     cy.get('button').contains(' passengers').click({ force: true })
-    cy.contains('Adults:', { timeout: 5000 })
     for (let i = 0; i < adultsNum; i++) {
-        cy.get(plus).eq(0).dblclick({ force: true })
-        cy.get(minus).eq(0).click({ force: true })
+        cy.get('button').get(plus).eq(0).dblclick({ force: true })
+        cy.get('button').get(minus).eq(0).click({ force: true })
     }
     for (let i = 0; i < childrenNum; i++) {
         cy.get(plus).eq(1).dblclick({ force: true })

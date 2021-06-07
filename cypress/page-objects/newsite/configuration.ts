@@ -11,6 +11,7 @@ export function checkPrice(CurNow:string, CurNext:string, price:string) {
 export function addStop(price:any) {
     cy.get('button').contains(price[0],{timeout:20000})
     cy.contains(price[1]).should('be.visible')
+    cy.wait(1000)
     cy.contains(price[1]).dblclick();
     cy.contains(price[2],{timeout:20000})
 }

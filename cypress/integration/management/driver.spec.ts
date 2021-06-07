@@ -6,7 +6,8 @@ describe("Smoke management", () => {
     const login = new Login();
     const navig = new Navigation();
     const driver = new Driver();
-    let countries: string[] = ['United State','Italy','India','Czech Republic',"Cambodia"]
+    //country and IBAN = 0, ABA = 1
+    let countries: any[][] = [['United State',1],['Italy',0],['India ',1],['Czech Republic',0],["Costa Rica",1]]
 
     beforeEach(() => {
         cy.visit(Cypress.env('login_management'), { timeout: 1200000 });
@@ -14,19 +15,34 @@ describe("Smoke management", () => {
     });
     it("Create driver & add vehicle", () => {
         login.managerRoot()
-        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-        driver.createDriver(countries[4])
-        driver.activiteDriver()
-        driver.editDriver()
-        driver.addNewVehicle('Nissan','Juke')
-        driver.removeDriver()
+        let i=0;
+        for(i=0; i<countries.length;i++){
+            cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+            driver.createDriver(countries[i][0])
+            driver.activiteDriver()
+            driver.editDriver()
+            driver.addNewVehicle('Nissan','Juke')
+            driver.removeDriver()
+        }
     })
-    it("Create BI",()=>{
+    it.only("Create BI",()=>{
         login.managerRoot()
-        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-        driver.createDriver(countries[0])
-        driver.createNewBI(1,countries[2])
-        driver.removeDriver()
-    })
+        let i,j=0;
+        for(i=0;i<2;i++){
+            for(j=0;j<countries.length;j++){
+                cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+                driver.createDriver(countries[j][0])
+                driver.createNewBI(i,countries[j])
+                driver.removeDriver()
+            }
+        }
 
+    })
+ it('test',()=>{
+    login.managerRoot()
+    cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+    driver.createDriver(countries[0][0])
+    driver.createNewBI(1,countries[0])
+    driver.removeDriver()
+ })
 })

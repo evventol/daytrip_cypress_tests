@@ -5,7 +5,7 @@ import { Navigation } from "../../page-objects/management/navigation";
 import { Order } from "../../page-objects/management/order";
 import { Assignation } from "../../page-objects/management/assignation";
 import { orderDriver } from "../../page-objects/management/orderDriver";
-
+import { Driver } from "../../page-objects/management/driver";
 describe("Smoke management", () => {
     const login = new Login();
     const navig = new Navigation();
@@ -64,22 +64,35 @@ describe("Smoke management", () => {
         login.managerRoot();
         content.forEach(page=>{
             cy.contains(page[0]).click({force:true})
-            cy.contains(page[1]).should('be.visible')
-            cy.wait(100)
+            cy.contains(page[1],{timeout:20000}).should('be.visible')
+            cy.wait(300)
         })
         drivers.forEach(page=>{
             cy.contains(page[0]).click({force:true})
-            cy.contains(page[1]).should('be.visible')
-            cy.wait(100)
+            cy.contains(page[1],{timeout:20000}).should('be.visible')
+            cy.wait(300)
         })
         customers.forEach(page=>{
             cy.contains(page[0]).click({force:true})
-            cy.contains(page[1]).should('be.visible')
-            cy.wait(100)
+            cy.contains(page[1],{timeout:20000}).should('be.visible')
+            cy.wait(300)
         })
     })
+    it("Create BI",()=>{
+        const driver = new Driver();
+        let countries: any[][] = [['United State',1],['Italy',0],['India ',1],['Czech Republic',0],["Costa Rica",1]]
+        login.managerRoot()
+        let i,j=0;
+        for(i=0;i<2;i++){
+            for(j=0;j<countries.length;j++){
+                cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+                driver.createDriver(countries[j][0])
+                driver.createNewBI(i,countries[j])
+                driver.removeDriver()
+            }
+        }
 
-
+    })
     afterEach(() => {
         login.unlogin()
     })

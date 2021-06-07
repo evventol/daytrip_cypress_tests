@@ -61,7 +61,7 @@ export class Driver{
         cy.contains('confirm').click()
         cy.contains('approved',{timeout:10000}).should('be.visible')
     }
-    createNewBI(type:number, country:string){
+    createNewBI(type:number, country:any[]){
         //type: 0-soletraider,1-legal person, 2-natural person
         cy.contains('Billing information').should('be.visible').click()
         if (type==0){
@@ -81,36 +81,46 @@ export class Driver{
         else{
             console.log('err')
         }
+        //email
         cy.get(':nth-child(1) > :nth-child(2) > :nth-child(2) > span > input').type('ev.test.ve+123@gmail.com')
-        cy.get('.Select-placeholder').first().click().type(country)
-        cy.get('.Select-option').first().click()
+        //Bank country
+        this.chooseDropDownn(country[0])
+        //company id
         cy.get(':nth-child(1) > :nth-child(4) > :nth-child(2) > span > input').type('123456789')
-        if (country=='United State'){
-        cy.get('._39cHKBXr35SBOnpDQuyzjZ > :nth-child(2) > ._28KrO56ecPUAkrhgPSf83E > :nth-child(2) > span > input').type('123456789')
+        if (country[1]==1){
         //fill ABA
+        cy.get('._39cHKBXr35SBOnpDQuyzjZ > :nth-child(2) > ._28KrO56ecPUAkrhgPSf83E > :nth-child(2) > span > input').type('123456789')
+        //Account Number
         cy.get(':nth-child(3) > ._3fZsBXjrv_KTSQgEq7HwDk > :nth-child(2) > span > input').type('11111111')
 
         }
         else{//fill IBAN
             cy.get('._28KrO56ecPUAkrhgPSf83E > ._3fZsBXjrv_KTSQgEq7HwDk > :nth-child(2) > span > input').type('IT60X0542811101000000123456')
         }
+        //first name
         cy.get('._39cHKBXr35SBOnpDQuyzjZ > :nth-child(4) > :nth-child(2) > span > input').type('yev')
+        //second name
         cy.get('._39cHKBXr35SBOnpDQuyzjZ > :nth-child(5) > :nth-child(2) > span > input').type('test')
+        // date
         cy.get('.Select-placeholder').first().click()
         cy.get('.Select-option').first().click()
-        cy.get('.Select-placeholder').first().click().type(country)
-        cy.get('.Select-option').first().click()
-        cy.get('.Select-placeholder').first().click().type(country)
-        cy.get('.Select-option').first().click()
+        //nationality
+        this.chooseDropDownn(country[0])
+        //country of residence
+        this.chooseDropDownn(country[0])
+        //address line
         cy.get('.W5RuKj834sf42HdrTE0E5 > ._3fZsBXjrv_KTSQgEq7HwDk._1VOkgeBRI4HAB2q7pVmx9m > :nth-child(2) > span > input').type('1 2 3')
+        //city
         cy.get('.W5RuKj834sf42HdrTE0E5 > :nth-child(4) > :nth-child(2) > span > input').type("NY")
+        //region
         cy.get('.W5RuKj834sf42HdrTE0E5 > :nth-child(5) > :nth-child(2) > span > input').type("ME")
+        //postal code
         cy.get('.W5RuKj834sf42HdrTE0E5 > :nth-child(6) > :nth-child(2) > span > input').type('11111')
-        cy.get('.Select-placeholder').first().click().type(country)
-        cy.get('.Select-option').first().click()
+        this.chooseDropDownn(country[0])
+        //repeate address
         cy.get('._38TLix94Eg3g4bHzzWTm7b').click()
         if (type==1){//if we fill legal person, we should fill UBO
-            this.fillUBO(country)
+            this.fillUBO(country[0])
         }
         //save BI
         cy.contains('save & set active').click()
@@ -142,5 +152,10 @@ export class Driver{
         cy.get('.Select-option').first().click()
         cy.get(':nth-child(6) > ._3fZsBXjrv_KTSQgEq7HwDk > :nth-child(2) > span > input').type('ENN')
 
+    }
+    chooseDropDownn(dropElem:string){
+        cy.get('.Select-placeholder').first().type(dropElem)
+
+        cy.get('.Select-option').first().click()
     }
 }

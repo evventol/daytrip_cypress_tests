@@ -1,45 +1,10 @@
-
 stages:
-  - build
   - test
 
-variables:
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
-
-# cache using branch name
-# https://gitlab.com/help/ci/caching/index.md
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm
-    - cache/Cypress
-    - node_modules
-    
-
-install:
-  image: cypress/browsers:node14.7.0-chrome84
-  stage: build
-
-  script:
-    - npm ci
-    - npx cypress cache path
-    - npx cypress cache list
-    - npx cypress verify
-
-.job_template:
-  image: cypress/browsers:node14.7.0-chrome84
+test:
+  image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: test
   script:
-      - npm run start:ci &
-      - npm run smoke
-  artifacts:
-    when: always
-    paths:
-      - cypress/videos/**/*.mp4
-      - cypress/screenshots/**/*.png
-    expire_in: 1 day
-
-
-smoke-1:
-  extends: .job_template
+    - npm ci
+    - npm run start:ci &
+    - npm run smoke:CI

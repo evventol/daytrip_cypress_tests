@@ -1,4 +1,7 @@
 {
+    "retries": {
+    "runMode": 2
+    },
     "env": {
         "login_management": "https://management.sandbox.mydaytrip.com/#/",
         "website_home_page": "https://sandbox.mydaytrip.com/",

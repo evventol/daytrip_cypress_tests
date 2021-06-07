@@ -1,8 +1,4 @@
-FROM cypress/base:12.16.1
-USER root
-WORKDIR /home/yev/Documents/Work/automatisation_cypress_test
-COPY . .
+FROM cypress/browsers:node12.14.1-chrome85-ff81
 
 RUN npm install
-RUN npx cypress install
-RUN npx cypress run
+RUN npm run smoke

@@ -31,7 +31,7 @@ export function MasterCardPayment() {
     fillCard('5549650000001239', '111')
 }
 export function basicPayment() {
-    fillCard('5555555555554444', '111')
+    fillCard('4970104100876588', '111')
 }
 export function USDPayment(){
     fillCard('4970104100876596', '111')
@@ -64,6 +64,31 @@ export function finishCashBooking() {
 }
 export function finishUrgentCardBooking() {
     cy.contains("Confirm and pay").should('be.visible').click({ force: true });
+    cy.get('input[id="code"]', { timeout: 20000 }).type('MANGOPAY123')
+    cy.contains('Submit').click()
     cy.wait(500)
     cy.contains("We’re looking for a driver", { timeout: 150000 }).should('be.visible');
+}
+export function finishBooking(cardCash:boolean){
+    if (cardCash){
+    cy.contains("Cash").click({ force: true });
+    cy.contains("Confirm your booking").click({ force: true });
+    }
+    else{
+        cy.contains("Confirm and pay").should('be.visible').click({ force: true });
+    }
+
+}
+export function lastWords(typeOfBooking:boolean){
+    if (typeOfBooking){
+        cy.contains("Your booking is confirmed!", { timeout: 150000 }).should('be.visible');
+    }
+    else
+    {
+        cy.contains("We’re looking for a driver", { timeout: 150000 }).should('be.visible');
+    }
+}
+export function _3dSecure(){
+    cy.get('input[id="code"]', { timeout: 20000 }).type('MANGOPAY123')
+    cy.contains('Submit').click()
 }

@@ -4,13 +4,13 @@
   "main": "index.js",
   "scripts": {
     "test-open": "cypress open",
-    "test": "cypress run --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --browser chrome --headless",
+    "test": "cypress run --browser chrome --headless",
     "smoke": " cypress run --spec 'cypress/integration/smoke/*.spec.ts' --browser chrome --headless --env CI=0",
-    "smoke:CI": "cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/*.spec.ts' --browser chrome --headless --env CI=1",
-    "smoke-site": " cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/1smoke_newsite.spec.ts' --browser chrome --headless ",
-    "smoke-management": " cypress run  --record --key 488da7fe-6b3c-41e2-b3ab-3233534ea8e0 --spec 'cypress/integration/smoke/smoke_management.spec.ts' --browser chrome --headless ",
-    "smoke:electron": "cypress run  --spec 'cypress/integration/smoke/*'",
-    "site": "cypress run  --spec 'cypress/integration/website/*' --browser chrome --headless  --env CI=0",
+    "smoke:CI": "cypress run --spec 'cypress/integration/smoke/*.spec.ts' --browser chrome --headless --env CI=1",
+    "smoke-site": " cypress run --spec 'cypress/integration/smoke/1smoke_newsite.spec.ts' --browser chrome --headless ",
+    "smoke-management": "cypress run --spec 'cypress/integration/smoke/smoke_management.spec.ts' --browser chrome --headless ",
+    "smoke:electron": "cypress run --spec 'cypress/integration/smoke/*'",
+    "site": "cypress run --spec 'cypress/integration/website/*' --browser chrome --headless  --env CI=0",
     "site:CI": "cypress run  --spec 'cypress/integration/website/*' --browser chrome --headless --env CI=1",
     "management": "cypress run  --spec 'cypress/integration/management/*' --browser chrome --headless",
     "ci": "run-s lint:ci ci:cy-run",
@@ -20,7 +20,15 @@
     "cy:run": "cypress run",
     "start:ci": "serve --no-clipboard --listen ${PORT:-8080}",
     "cy:verify": "cypress verify",
-    "cy:info": "cypress info"
+    "cy:info": "cypress info",
+    "cy:version": "cypress version",
+    "cy:cache:list": "cypress cache list",
+    "cy:run:record": "cypress run --record",
+    "cy:open": "cypress open",
+    "local:open": "start-test 8080 cy:open",
+    "local:run": "start-test 8080 cy:run",
+    "local:run:record": "start-test 8080 cy:run:record",
+    "ci:set-port": "node ./scripts/set-port"
   },
   "repository": {
     "type": "git",
@@ -33,6 +41,7 @@
   },
   "homepage": "https://github.com/evventol/daytrip_cypress_tests#readme",
   "dependencies": {
+    "cypress-xpath": "1.6.2",
     "serve": "11.3.2"
   },
   "devDependencies": {
@@ -41,9 +50,11 @@
     "cypress": "7.0.1",
     "npm-run-all": "4.1.5",
     "start-server-and-test": "1.12.0",
+    "stop-build": "1.1.0",
     "ts-loader": "8.0.14",
     "typescript": "4.1.3",
-    "webpack": "4.41.6"
+    "webpack": "4.41.6",
+    "yaml-lint": "1.2.4"
   },
-  "description": ""
+  "description": " "
 }
