@@ -155,7 +155,6 @@ export class Driver{
     }
     chooseDropDownn(dropElem:string){
         cy.get('.Select-placeholder').first().type(dropElem)
-
         cy.get('.Select-option').first().click()
     }
 }

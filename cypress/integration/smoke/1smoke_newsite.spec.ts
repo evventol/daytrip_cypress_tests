@@ -62,7 +62,7 @@ describe("Smoke newsite", () => {
         fillTAEmail();
         fillPassengerInfo();
         basicPayment();
-        finish3DSecureBooking();
+        finishCardBooking();
     });
     it("C167 Draft booking", () => {
         cy.reload()
@@ -102,6 +102,15 @@ describe("Smoke newsite", () => {
         fillEmail();
         fillPassengerInfo();
         MasterCardPayment()
+        finish3DSecureBooking();
+    })
+    it('AMEX booking',()=>{
+        cy.visit(configurationPage)
+        addStop(locationTime[0])
+        vehicleMPVUpd('314','61');
+        fillEmail();
+        fillPassengerInfo();
+        AMEXpayment()
         finish3DSecureBooking();
     })
     it('USD booking',()=>{

@@ -16,7 +16,7 @@ export function addStop(price:any) {
     cy.contains(price[2],{timeout:20000})
 }
 export function vehicleMPVUpd(mpvPrice:string,mpvUpdatePrice:string) {
-    cy.contains('Upgrade to a MPV for €'+mpvUpdatePrice, { timeout: 15000 }).click({ force: true })
+    cy.contains('Upgrade to an MPV for €'+mpvUpdatePrice, { timeout: 15000 }).click({ force: true })
     cy.contains(mpvPrice)
     cy.contains("Book your trip for").click({ force: true });
     cy.contains('Complete your booking', { timeout: 5000 }).should('be.visible')
