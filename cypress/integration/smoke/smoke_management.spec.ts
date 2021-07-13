@@ -51,9 +51,12 @@ describe("Smoke management", () => {
     it("C87 smoke-cancelling order", () => {
         login.managerRoot();
         let i=0;
-        for (i=0;i<3;i++){
-        navig.goToOrderPage(i);
-        ord.cancelOrder();
+        for (i=1;i<9;i++){
+            if (i == 5 || i == 6){
+                continue;
+            }
+            navig.goToOrderPage(i);
+            ord.cancelOrder();
         }
         login.unlogin()
     });
@@ -82,15 +85,10 @@ describe("Smoke management", () => {
         const driver = new Driver();
         let countries: any[][] = [['United State',1],['Italy',0],['India ',1],['Czech Republic',0],["Costa Rica",1]]
         login.managerRoot()
-        let i,j=0;
-        for(i=0;i<2;i++){
-            for(j=0;j<countries.length;j++){
-                cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
-                driver.createDriver(countries[j][0])
-                driver.createNewBI(i,countries[j])
-                driver.removeDriver()
-            }
-        }
+        cy.visit(Cypress.env('login_management')+'drivers', { timeout: 1200000 });
+        driver.createDriver(countries[0][0])
+        driver.createNewBI(0,countries[0])
+        driver.removeDriver()
 
     })
     afterEach(() => {

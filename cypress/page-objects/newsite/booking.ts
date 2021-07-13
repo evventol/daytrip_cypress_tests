@@ -1,16 +1,20 @@
 /// <reference types = "cypress"/>
+/// <reference types = "cypress-xpath"/>
+let card:[["usd",'4970104100876596', '111',true],['AMEX','375987888352361', '1234',true],['MasterCard','5549650000001239', '111',true],['basic','5555555555554444','111',false]];
+
 export function fillEmail() {
     let rand=Math.floor(Math.random()*10000)
-    cy.get("#lead-passenger-email").type("ev.test.ve+"+rand+"@gmail.com");
+    cy.get("#lead-passenger-email").type("ev.test.ve+c"+rand+"@gmail.com");
     cy.contains("Save and continue").click();
     cy.contains("Lead passenger", { timeout: 10000 }).should("be.visible");
 }
 export function fillPassengerInfo() {
     cy.get("#adult_0_firstName").type("test");
     cy.get("#adult_0_lastName").type("test2");
-    cy.get('input[placeholder="DD"]').type("01");
-    cy.get('.MonthSelectorstyles__ToggleButton-tv2yru-1')
-    cy.get('#month-option-0').click()
+    cy.xpath('//*[@id="date-input"]').type("11");
+    //cy.xpath('//*[@id="__next"]/div/form/div[1]/div[1]/div/div[3]/div/div/button').click()
+    cy.contains("January").click({force:true})
+    // cy.xpath('//*[@id="month-option-0"]').click({force:true})
     cy.get('input[placeholder="YYYY"]').type("2000");
     cy.get("#phone").type("4155552671");
 }
@@ -31,8 +35,11 @@ export function MasterCardPayment() {
     fillCard('5549650000001239', '111')
 }
 export function basicPayment() {
-    //fillCard('4970104100876588', '111')
+
     fillCard('5555555555554444', '111')
+}
+export function VISAPayment() {
+    fillCard('4970104100876596', '111')
 }
 export function USDPayment(){
     fillCard('4970104100876596', '111')

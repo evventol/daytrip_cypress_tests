@@ -25,7 +25,7 @@ export function configurateWithoutLocation(price:string) {
     cy.wait(1000)
     cy.get('button').contains(price, { timeout: 10000 }).click({ force: true });
     cy.contains('No sights selected', { timeout: 50000 }).should("be.visible")
-    cy.wait(1000)
+    cy.wait(5000)
     cy.contains("Book without sights", { timeout: 50000 }).should("be.visible").click({ force: true })
     cy.contains('Complete your booking', { timeout: 50000 }).should('be.visible')
 }
