@@ -27,15 +27,16 @@ import {
 } from "../../page-objects/newsite/booking";
 import {
     vehicleMPVUpd,
-    configurateWithoutLocation,
+    finishConfiguration,
     nextDayConfiguration,
     addStop
 } from "../../page-objects/newsite/configuration";
-let locationTime = [
-    ["226", "27", "253"],
-    ["79", "19", "98"]
+let locationPrices = [
+    ["226", "27", "253","Terezin"],
+    ["79", "19", "98",'Waterlily Lake In Baile Felix'],
+    []
 ]
-
+let currency=['€','$']
 const configurationPage = Cypress.env('site_home_page') + "configurator?adults=3&children=0&currency=0&departureAt=1637226000000&isOtherDirection=true&luggage=2&passengers=2&routeId=dc787d17-8146-438a-9be7-07fe1153b354&vehicles=0"
 describe("Smoke newsite", () => {
     beforeEach(() => {
@@ -45,25 +46,34 @@ describe("Smoke newsite", () => {
         else{
             visitNewSite(Cypress.env('site_home_page'));
         }
-        cy.reload()
+        cy.xpath('//*[@id="__next"]/section[1]/div/div[1]/div/div/div[2]/div[1]/div[1]/div/input')
     });
 
     it("C165 Landing cash booking", () => {
         landingBooking()
         cy.contains('10:15')
-        configurateWithoutLocation("226");
+        finishConfiguration(226,true);
         fillEmail();
         cy.contains('10:15')
         fillPassengerInfo();
         finishCashBooking();
     });
     it("C166 TA card booking", () => {
+
+        let price:number
         loginAsTA("ev.test.ve+302@gmail.com","afq2t8N9");
         startBooking('Prague','Berlin');
         cy.contains('Your 10% travel agent discount', { timeout: 20000 })
-        addStop(locationTime[0])
+        price=226
+        cy.contains(price)
+        addStop(currency[0],1)
+        addStop(currency[0],2)
+        addStop(currency[0],3)
         cy.contains('10:15')
-        vehicleMPVUpd('314','61');
+        vehicleMPVUpd(currency[0]);
+        price=370
+        cy.contains(price)
+        finishConfiguration(price,false);
         fillTAEmail();
         cy.contains('10:15')
         fillPassengerInfo();
@@ -71,19 +81,18 @@ describe("Smoke newsite", () => {
         finish3DSecureBooking();
     });
     it("C167 Draft booking", () => {
-        cy.reload()
         startBooking('Prague','Berlin');
         cy.contains('10:15')
-        configurateWithoutLocation('226');
+        finishConfiguration(226,true);
         cy.contains('10:15')
         fillEmail();
     })
     it('C168 Urgent booking', () => {
-        cy.reload()
+
         let newURL = nextDayConfiguration();
         cy.visit(newURL, { timeout: 100000 });
         cy.xpath('//*[@id="__next"]/div[2]/div[2]/div/div/div/div[1]/div[2]/div[2]/div[1]/div[2]/button').invoke('text').then(($time)=>{
-            configurateWithoutLocation('79');
+            finishConfiguration(79,true);
             cy.xpath('//*[@id="__next"]/div/div[1]/div/div[2]/div[1]/div/div[1]/div[2]/span').contains($time)
         })
         fillEmail();
@@ -93,12 +102,13 @@ describe("Smoke newsite", () => {
 
     })
     it('C169 Customer booking', () => {
-        cy.reload()
+
         loginAsCustomer('ev.test.ve@gmail.com','56BA9C')
         cy.url().should('include', '/customer/upcoming-trips')
         cy.visit(configurationPage)
-        addStop(locationTime[0])
-        vehicleMPVUpd('314','61');
+        addStop(currency[0],1)
+        vehicleMPVUpd(currency[0]);
+        finishConfiguration(314,false);
         fillTAEmail();
         cy.wait(1000)
         fillPreCustomerInfo('test');
@@ -109,7 +119,8 @@ describe("Smoke newsite", () => {
     it('MasterCard booking',()=>{
 
         startBooking('Prague','Berlin');
-        configurateWithoutLocation('226');
+        //configurateWithoutLocation('226');
+        finishConfiguration(226,true);
         fillEmail();
         fillPassengerInfo();
         MasterCardPayment()
@@ -117,8 +128,9 @@ describe("Smoke newsite", () => {
     })
     it('AMEX booking',()=>{
         cy.visit(configurationPage)
-        addStop(locationTime[0])
-        vehicleMPVUpd('314','61');
+        addStop(currency[0],1)
+        vehicleMPVUpd(currency[0]);
+        finishConfiguration(314,false);
         fillEmail();
         fillPassengerInfo();
         AMEXpayment()
@@ -126,7 +138,7 @@ describe("Smoke newsite", () => {
     })
     it('USD booking',()=>{
         startBooking('Boston','Bangor');
-        configurateWithoutLocation('621');
+        finishConfiguration(621,true);
         fillEmail();
         fillPassengerInfo();
         USDPayment()

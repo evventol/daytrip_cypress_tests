@@ -30,7 +30,7 @@ describe("new site-> config page", () => {
     });
     it("C57 Check locations", () => {
         let price=['79','20','99'];
-        addStop(price)
+        addStop('€',1)
         cy.contains("60 min");
         
         //remove location
